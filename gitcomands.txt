@@ -6,3 +6,4 @@ list -a OR Get-ChildItem -Force                                      // discover
 git status // show the status of new codes
 git add <-file name ->
 git commit -m "message"
+git puch origin main // upload local repo content to remote repo 
