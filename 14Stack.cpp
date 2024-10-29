@@ -16,6 +16,18 @@ void push(int stack[], int &n, int &top)
     }
 }
 
+void pop(int stack[], int n, int &top)
+{
+    if (top == -1)
+    {
+        cout << "Array is Empty.\n";
+    }
+    else
+    {
+        stack[--top];
+    }
+}
+
 void display(int stack[], int top)
 {
     for (int i = 0; i <= top; i++)
@@ -42,12 +54,10 @@ int main()
 
     cout << endl;
 
-
     for (int i = 0; i < n; i++)
     {
         cout << stack[i] << " ";
     }
-    
 
     cout << endl;
     return 0;
