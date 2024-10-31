@@ -28,9 +28,21 @@ void pop(int stack[], int n, int &top)
     }
 }
 
+void peek(int stack[], int top)
+{
+    if (top != -1)
+    {
+        cout << stack[top] << endl;
+    }
+    else
+    {
+        cout << "Stack is empty." << endl;
+    }
+}
+
 void display(int stack[], int top)
 {
-    for (int i = 0; i <= top; i++)
+    for (int i = top; i >= 0; i--)
     {
         cout << stack[i] << " ";
     }
@@ -48,16 +60,20 @@ int main()
     push(stack, n, top);
     push(stack, n, top);
     push(stack, n, top);
+
+    peek(stack, top);
+
     push(stack, n, top);
 
     display(stack, top);
 
     cout << endl;
 
-    for (int i = 0; i < n; i++)
-    {
-        cout << stack[i] << " ";
-    }
+    display(stack, top);
+
+    cout << endl;
+
+    peek(stack, top);
 
     cout << endl;
     return 0;
