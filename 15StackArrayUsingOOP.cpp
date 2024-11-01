@@ -1,105 +1,195 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
 using namespace std;
 
-class Stack
+class stack
 {
 private:
     int *arr;
-    int top;
+    int top = -1;
     int capacity;
 
 public:
-    Stack(int size)
+    stack(int size)
     {
         arr = (int *)malloc(size * sizeof(int));
         capacity = size;
-        top = -1;
     }
-    ~Stack()
+    ~stack()
     {
         free(arr);
     }
-
-    void push(int x)
+    void push(int value)
     {
-        if (isFull())
+        if (top == capacity - 1)
         {
-            cout << "Stack is Full.\n";
-            return;
+            cout << "Stack Overflow." << endl;
         }
         else
         {
-            arr[++top] = x;
-            cout << "Insertion is complete.\n";
+            top++;
+            arr[top] = value;
+            cout << "Insertion Complete." << endl;
         }
     }
-
-    int peek()
+    void pop()
     {
-        if (isEmpty())
+        if (top == -1)
         {
+            cout << "Stack Underflow." << endl;
         }
-        cout << "Stack is empty." << endl;
-        return -1;
-        return arr[top];
-    }
-
-    int pop()
-    {
-        if (isEmpty())
+        else
         {
-            cout << "Array is Empty.";
-            return;
+            arr[top--];
         }
-        arr[top--];
     }
-
-    void display()
+    void peek() const
     {
-        for (int i = 0; i <= top; i++)
+        cout << "Top: " << top << endl;
+    }
+    void display() const
+    {
+        if (top == -1)
         {
-            cout << arr[i] << " ";
+            cout << "Stack is Empty.\n";
         }
-        cout << endl;
-    }
-
-    int size() const
-    {
-        return top + 1;
-    }
-
-    bool isEmpty() const
-    {
-        return top == -1;
-    }
-
-    bool isFull() const
-    {
-        return top == capacity - 1;
+        else
+        {
+            for (int i = top; i >= 0; i--)
+            {
+                cout << arr[i] << " ";
+            }
+            cout << endl;
+        }
     }
 };
 
 int main()
 {
+    stack arr(5);
 
-    Stack stack(6);
-
-    for (int i = 0; i < stack.isFull(); i++)
+    for (int i = 0; i < 5; i++)
     {
-        int randomNum = rand() % 100;
-        stack.push(randomNum);
+        arr.push(i+1);
     }
+    arr.display();
 
-    cout << "Current stack using display Func : ";
-    stack.display();
+    arr.pop();
+    arr.pop();
+    arr.display();
+    arr.pop();
 
-    cout << "Popping elements to show LIFO behavior:" << endl;
-    while (!stack.isEmpty())
-    {
-        cout << "Popped: " << stack.pop() << endl;
-    }
+
+    
+
     cout << endl;
     return 0;
 }
+
+// ==================================================================================================================
+// ==================================================================================================================
+// ==================================================================================================================
+
+// #include <iostream>
+// #include <cstdlib>
+// #include <ctime>
+// using namespace std;
+
+// class Stack
+// {
+// private:
+//     int *arr;
+//     int top;
+//     int capacity;
+
+// public:
+//     Stack(int size)
+//     {
+//         arr = (int *)malloc(size * sizeof(int));
+//         capacity = size;
+//         top = -1;
+//     }
+//     ~Stack()
+//     {
+//         free(arr);
+//     }
+
+//     void push(int x)
+//     {
+//         if (isFull())
+//         {
+//             cout << "Stack is Full.\n";
+//             return;
+//         }
+//         else
+//         {
+//             arr[++top] = x;
+//             cout << "Insertion is complete.\n";
+//         }
+//     }
+
+//     int peek()
+//     {
+//         if (isEmpty())
+//         {
+//         }
+//         cout << "Stack is empty." << endl;
+//         return -1;
+//         return arr[top];
+//     }
+
+//     int pop()
+//     {
+//         if (isEmpty())
+//         {
+//             cout << "Array is Empty.";
+//             return -1;
+//         }
+//         return arr[top--];
+//     }
+
+//     void display()
+//     {
+//         for (int i = 0; i <= top; i++)
+//         {
+//             cout << arr[i] << " ";
+//         }
+//         cout << endl;
+//     }
+
+//     int size() const
+//     {
+//         return top + 1;
+//     }
+
+//     bool isEmpty() const
+//     {
+//         return top == -1;
+//     }
+
+//     bool isFull() const
+//     {
+//         return top == capacity - 1;
+//     }
+// };
+
+// int main()
+// {
+
+//     Stack stack(6);
+
+//     for (int i = 0; i < 6; i++)
+//     {
+//         stack.push(i + 1);
+//     }
+
+//     cout << "Current stack using display Func : ";
+//     stack.display();
+
+//     cout << "Popping elements to show LIFO behavior:" << endl;
+//     while (!stack.isEmpty())
+//     {
+//         cout << "Popped: " << stack.pop() << endl;
+//     }
+//     cout << endl;
+//     return 0;
+// }
