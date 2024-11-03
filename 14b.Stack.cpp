@@ -1,195 +1,245 @@
+// #include <iostream>
+// using namespace std;
+
+// // Stack implementation using INT data type.
+
+// class stack
+// {
+// private:
+//     int *arr;
+//     int top = -1;
+//     int capacity;
+
+// public:
+//     stack(int size)
+//     {
+//         arr = (int *)malloc(size * sizeof(int));
+//         capacity = size;
+//     }
+//     ~stack()
+//     {
+//         free(arr);
+//     }
+//     void push(int value)
+//     {
+//         if (top == capacity - 1)
+//         {
+//             cout << "Stack Overflow." << endl;
+//         }
+//         else
+//         {
+//             top++;
+//             arr[top] = value;
+//             cout << "Insertion Complete." << endl;
+//         }
+//     }
+//     void pop()
+//     {
+//         if (top == -1)
+//         {
+//             cout << "Stack Underflow." << endl;
+//         }
+//         else
+//         {
+//             arr[top--];
+//         }
+//     }
+//     void peek() const
+//     {
+//         cout << "Top: " << top << endl;
+//     }
+//     void display() const
+//     {
+//         if (top == -1)
+//         {
+//             cout << "Stack is Empty.\n";
+//         }
+//         else
+//         {
+//             for (int i = top; i >= 0; i--)
+//             {
+//                 cout << arr[i] << " ";
+//             }
+//             cout << endl;
+//         }
+//     }
+// };
+
+// int main()
+// {
+//     stack arr(5);
+
+//     for (int i = 0; i < 5; i++)
+//     {
+//         arr.push(i + 1);
+//     }
+//     arr.display();
+
+//     arr.pop();
+//     arr.pop();
+//     arr.display();
+//     arr.pop();
+
+//     cout << endl;
+//     return 0;
+// }
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
 #include <iostream>
 using namespace std;
+
+// Stack implementation using String data type.
 
 class stack
 {
 private:
-    int *arr;
+    string *arr;
     int top = -1;
     int capacity;
 
 public:
-    stack(int size)
+    stack(int size) : capacity(size)
     {
-        arr = (int *)malloc(size * sizeof(int));
-        capacity = size;
+        arr = (string *)malloc(size * sizeof(string));
     }
     ~stack()
     {
         free(arr);
     }
-    void push(int value)
+    void push(string ch_string)
     {
         if (top == capacity - 1)
         {
-            cout << "Stack Overflow." << endl;
+            cout << "Stack is Overflow.\n";
         }
         else
         {
-            top++;
-            arr[top] = value;
-            cout << "Insertion Complete." << endl;
+            arr[++top] = ch_string;
+            cout << "String had pushed: " << ch_string << endl;
         }
     }
-    void pop()
+    void poped()
     {
         if (top == -1)
         {
-            cout << "Stack Underflow." << endl;
+            cout << "Stack is Underflow\n";
         }
         else
         {
+            cout << "the string have poped: " << arr[top] << endl;
             arr[top--];
         }
     }
-    void peek() const
+    void peek()
     {
-        cout << "Top: " << top << endl;
-    }
-    void display() const
-    {
-        if (top == -1)
+        if (top != -1)
         {
-            cout << "Stack is Empty.\n";
+            cout << "The peek is: " << arr[top] << endl;
         }
         else
         {
-            for (int i = top; i >= 0; i--)
-            {
-                cout << arr[i] << " ";
-            }
-            cout << endl;
+            cout << "Stack is Underflow.\n";
         }
     }
 };
 
 int main()
 {
-    stack arr(5);
+    stack arr(2);
+    arr.push("Haseeb khan");
+    arr.push("aaaaaaaaaaa");
+    arr.push("sssssssssss");
+    arr.push("rrrrrrrrrrr");
 
-    for (int i = 0; i < 5; i++)
-    {
-        arr.push(i+1);
-    }
-    arr.display();
-
-    arr.pop();
-    arr.pop();
-    arr.display();
-    arr.pop();
-
-
-    
+    arr.peek();
+    arr.poped();
+    arr.poped();
+    arr.poped();
+    arr.poped();
+    arr.poped();
 
     cout << endl;
     return 0;
 }
 
-// ==================================================================================================================
-// ==================================================================================================================
-// ==================================================================================================================
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
-// #include <iostream>
-// #include <cstdlib>
-// #include <ctime>
-// using namespace std;
 
-// class Stack
-// {
-// private:
-//     int *arr;
-//     int top;
-//     int capacity;
+#include <iostream>
+using namespace std;
 
-// public:
-//     Stack(int size)
-//     {
-//         arr = (int *)malloc(size * sizeof(int));
-//         capacity = size;
-//         top = -1;
-//     }
-//     ~Stack()
-//     {
-//         free(arr);
-//     }
+// Stack implementation using char data type.
 
-//     void push(int x)
-//     {
-//         if (isFull())
-//         {
-//             cout << "Stack is Full.\n";
-//             return;
-//         }
-//         else
-//         {
-//             arr[++top] = x;
-//             cout << "Insertion is complete.\n";
-//         }
-//     }
+class stack
+{
+private:
+    char *arr;
+    int top;
+    int capacity;
 
-//     int peek()
-//     {
-//         if (isEmpty())
-//         {
-//         }
-//         cout << "Stack is empty." << endl;
-//         return -1;
-//         return arr[top];
-//     }
+public:
+    stack(int size) : capacity(size), top(-1)
+    {
+        arr = new char[size];
+    }
+    ~stack()
+    {
+        delete[] arr;
+    }
+    void push(char ch)
+    {
+        if (top == capacity - 1)
+        {
+            cout << "Stack is Overflow.\n";
+        }
+        else
+        {
+            arr[++top] = ch;
+            cout << "Character has been pushed: " << ch << endl;
+        }
+    }
+    void poped()
+    {
+        if (top == -1)
+        {
+            cout << "Stack is Underflow\n";
+        }
+        else
+        {
+            cout << "The character that has been popped: " << arr[top--] << endl;
+        }
+    }
+    void peek()
+    {
+        if (top != -1)
+        {
+            cout << "The peek is: " << arr[top] << endl;
+        }
+        else
+        {
+            cout << "Stack is Underflow.\n";
+        }
+    }
+};
 
-//     int pop()
-//     {
-//         if (isEmpty())
-//         {
-//             cout << "Array is Empty.";
-//             return -1;
-//         }
-//         return arr[top--];
-//     }
+int main()
+{
+    stack arr(2);
+    arr.push('A');
+    arr.push('B');
+    arr.push('C');
+    arr.push('D');
 
-//     void display()
-//     {
-//         for (int i = 0; i <= top; i++)
-//         {
-//             cout << arr[i] << " ";
-//         }
-//         cout << endl;
-//     }
+    arr.peek();
+    arr.poped();
+    arr.poped();
+    arr.poped();
 
-//     int size() const
-//     {
-//         return top + 1;
-//     }
-
-//     bool isEmpty() const
-//     {
-//         return top == -1;
-//     }
-
-//     bool isFull() const
-//     {
-//         return top == capacity - 1;
-//     }
-// };
-
-// int main()
-// {
-
-//     Stack stack(6);
-
-//     for (int i = 0; i < 6; i++)
-//     {
-//         stack.push(i + 1);
-//     }
-
-//     cout << "Current stack using display Func : ";
-//     stack.display();
-
-//     cout << "Popping elements to show LIFO behavior:" << endl;
-//     while (!stack.isEmpty())
-//     {
-//         cout << "Popped: " << stack.pop() << endl;
-//     }
-//     cout << endl;
-//     return 0;
-// }
+    cout << endl;
+    return 0;
+}
