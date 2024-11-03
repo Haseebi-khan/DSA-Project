@@ -15,8 +15,7 @@ int linearSearch(int arr[], int size, int element)
 
 int main()
 {
-
-    int size = 10;
+    const int size = 10;
     int arr[size] = {34, 23, 1, 44, 5, 67, 23, 33, 23, 5};
 
     cout << "Enter Element for Search: ";
@@ -27,11 +26,11 @@ int main()
 
     if (found != -1)
     {
-        cout << found;
+        cout << "Value found at Index: " << found << endl;
     }
     else
     {
-        cout << "Value is not found.";
+        cout << "Value is not found." << endl;
     }
 
     cout << endl;
