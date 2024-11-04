@@ -170,76 +170,76 @@ int main()
 //////////////////////////////////////////////////////////////////////
 
 
-#include <iostream>
-using namespace std;
+// #include <iostream>
+// using namespace std;
 
-// Stack implementation using char data type.
+// // Stack implementation using char data type.
 
-class stack
-{
-private:
-    char *arr;
-    int top;
-    int capacity;
+// class stack
+// {
+// private:
+//     char *arr;
+//     int top;
+//     int capacity;
 
-public:
-    stack(int size) : capacity(size), top(-1)
-    {
-        arr = new char[size];
-    }
-    ~stack()
-    {
-        delete[] arr;
-    }
-    void push(char ch)
-    {
-        if (top == capacity - 1)
-        {
-            cout << "Stack is Overflow.\n";
-        }
-        else
-        {
-            arr[++top] = ch;
-            cout << "Character has been pushed: " << ch << endl;
-        }
-    }
-    void poped()
-    {
-        if (top == -1)
-        {
-            cout << "Stack is Underflow\n";
-        }
-        else
-        {
-            cout << "The character that has been popped: " << arr[top--] << endl;
-        }
-    }
-    void peek()
-    {
-        if (top != -1)
-        {
-            cout << "The peek is: " << arr[top] << endl;
-        }
-        else
-        {
-            cout << "Stack is Underflow.\n";
-        }
-    }
-};
+// public:
+//     stack(int size) : capacity(size), top(-1)
+//     {
+//         arr = new char[size];
+//     }
+//     ~stack()
+//     {
+//         delete[] arr;
+//     }
+//     void push(char ch)
+//     {
+//         if (top == capacity - 1)
+//         {
+//             cout << "Stack is Overflow.\n";
+//         }
+//         else
+//         {
+//             arr[++top] = ch;
+//             cout << "Character has been pushed: " << ch << endl;
+//         }
+//     }
+//     void poped()
+//     {
+//         if (top == -1)
+//         {
+//             cout << "Stack is Underflow\n";
+//         }
+//         else
+//         {
+//             cout << "The character that has been popped: " << arr[top--] << endl;
+//         }
+//     }
+//     void peek()
+//     {
+//         if (top != -1)
+//         {
+//             cout << "The peek is: " << arr[top] << endl;
+//         }
+//         else
+//         {
+//             cout << "Stack is Underflow.\n";
+//         }
+//     }
+// };
 
-int main()
-{
-    stack arr(2);
-    arr.push('A');
-    arr.push('B');
-    arr.push('C');
-    arr.push('D');
+// int main()
+// {
+//     stack arr(2);
+//     arr.push('A');
+//     arr.push('B');
+//     arr.push('C');
+//     arr.push('D');
 
-    arr.peek();
-    arr.poped();
-    arr.poped();
-    arr.poped();
+//     arr.peek();
+//     arr.poped();
+//     arr.poped();
+//     arr.poped();
 
-    cout << endl;
-    return 0;
-}
+//     cout << endl;
+//     return 0;
+// }
