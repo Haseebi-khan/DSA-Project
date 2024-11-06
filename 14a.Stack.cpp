@@ -1,8 +1,12 @@
 #include <iostream>
-using namespace std;
-// Stack implementation using INT data type.
 
-void push(int stack[], int &n, int &top)
+using namespace std;
+
+int n = 5;
+int stack[5];
+int top = -1;
+
+void push()
 {
     if (top == n - 1)
     {
@@ -16,7 +20,7 @@ void push(int stack[], int &n, int &top)
     }
 }
 
-void pop(int stack[], int n, int &top)
+void pop()
 {
     if (top == -1)
     {
@@ -28,7 +32,7 @@ void pop(int stack[], int n, int &top)
     }
 }
 
-void peek(int stack[], int top)
+void peek()
 {
     if (top != -1)
     {
@@ -40,7 +44,7 @@ void peek(int stack[], int top)
     }
 }
 
-void display(int stack[], int top)
+void display()
 {
     for (int i = top; i >= 0; i--)
     {
@@ -50,200 +54,282 @@ void display(int stack[], int top)
 
 int main()
 {
-
-    int n = 5;
-    int stack[n];
-    int top = -1;
-
-    push(stack, n, top);
-    push(stack, n, top);
-    push(stack, n, top);
-    push(stack, n, top);
-    push(stack, n, top);
-
-    peek(stack, top);
-
-    push(stack, n, top);
-
-    display(stack, top);
+    push();
+    push();
+    push();
+    push();
+    push();
+    ///////
+    peek();
+    ///////
+    push();
+    ///////
+    display();
 
     cout << endl;
 
-    display(stack, top);
+    display();
 
     cout << endl;
 
-    peek(stack, top);
+    peek();
 
     cout << endl;
     return 0;
 }
 
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////
 
-#include <iostream>
-using namespace std;
-// Stack implementation using STRING Data type.
+// #include <iostream>
+// using namespace std;
+// // Stack implementation using INT data type.
 
-void push(string stack[], int &n, int &top)
-{
-    if (top == n - 1)
-    {
-        cout << "Stack is full" << endl;
-    }
-    else
-    {
-        top++;
-        cout << "Enter the String in stack: ";
-        cin >> stack[top];
-    }
-}
+// void push(int stack[], int &n, int &top)
+// {
+//     if (top == n - 1)
+//     {
+//         cout << "Stack is full" << endl;
+//     }
+//     else
+//     {
+//         top++;
+//         cout << "Enter the Value in stack: ";
+//         cin >> stack[top];
+//     }
+// }
 
-void pop(string stack[], int n, int &top)
-{
-    if (top == -1)
-    {
-        cout << "Stack is Empty.\n";
-    }
-    else
-    {
-        cout << "Stack had free the string: " << stack[top] << "\n";
-        stack[--top];
-    }
-}
+// void pop(int stack[], int n, int &top)
+// {
+//     if (top == -1)
+//     {
+//         cout << "Array is Empty.\n";
+//     }
+//     else
+//     {
+//         stack[--top];
+//     }
+// }
 
-void peek(string stack[], int top)
-{
-    if (top != -1)
-    {
-        cout << stack[top] << endl;
-    }
-    else
-    {
-        cout << "Stack is empty." << endl;
-    }
-}
+// void peek(int stack[], int top)
+// {
+//     if (top != -1)
+//     {
+//         cout << stack[top] << endl;
+//     }
+//     else
+//     {
+//         cout << "Stack is empty." << endl;
+//     }
+// }
 
-void display(string stack[], int top)
-{
-    for (int i = top; i >= 0; i--)
-    {
-        cout << stack[i] << "\n";
-    }
-}
+// void display(int stack[], int top)
+// {
+//     for (int i = top; i >= 0; i--)
+//     {
+//         cout << stack[i] << " ";
+//     }
+// }
 
-int main()
-{
+// int main()
+// {
 
-    int n = 2;
-    string stack[n];
-    int top = -1;
+//     int n = 5;
+//     int stack[n];
+//     int top = -1;
 
-    push(stack, n, top);
-    push(stack, n, top);
-    push(stack, n, top);
-    push(stack, n, top);
-    push(stack, n, top);
+//     push(stack, n, top);
+//     push(stack, n, top);
+//     push(stack, n, top);
+//     push(stack, n, top);
+//     push(stack, n, top);
 
-    peek(stack, top);
+//     peek(stack, top);
 
-    push(stack, n, top);
+//     push(stack, n, top);
 
-    cout << endl;
+//     display(stack, top);
 
-    cout << endl;
+//     cout << endl;
 
-    pop(stack, n, top);
-    pop(stack, n, top);
+//     display(stack, top);
 
-    pop(stack, n, top);
-    pop(stack, n, top);
+//     cout << endl;
 
-    cout << endl;
-    return 0;
-}
+//     peek(stack, top);
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
+//     cout << endl;
+//     return 0;
+// }
 
-#include <iostream>
-using namespace std;
+// ////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////
 
-// Stack implementation using CHAR Data type.
+// #include <iostream>
+// using namespace std;
+// // Stack implementation using STRING Data type.
 
-void push(char stack[], int &n, int &top)
-{
-    if (top == n - 1)
-    {
-        cout << "Stack is full" << endl;
-    }
-    else
-    {
-        top++;
-        cout << "Enter the Character in stack: ";
-        cin >> stack[top];
-    }
-}
+// void push(string stack[], int &n, int &top)
+// {
+//     if (top == n - 1)
+//     {
+//         cout << "Stack is full" << endl;
+//     }
+//     else
+//     {
+//         top++;
+//         cout << "Enter the String in stack: ";
+//         cin >> stack[top];
+//     }
+// }
 
-void pop(char stack[], int n, int &top)
-{
-    if (top == -1)
-    {
-        cout << "Stack is Empty.\n";
-    }
-    else
-    {
-        cout << "Stack had freed the character: " << stack[top--] << "\n";
-    }
-}
+// void pop(string stack[], int n, int &top)
+// {
+//     if (top == -1)
+//     {
+//         cout << "Stack is Empty.\n";
+//     }
+//     else
+//     {
+//         cout << "Stack had free the string: " << stack[top] << "\n";
+//         stack[--top];
+//     }
+// }
 
-void peek(char stack[], int top)
-{
-    if (top != -1)
-    {
-        cout << stack[top] << endl;
-    }
-    else
-    {
-        cout << "Stack is empty." << endl;
-    }
-}
+// void peek(string stack[], int top)
+// {
+//     if (top != -1)
+//     {
+//         cout << stack[top] << endl;
+//     }
+//     else
+//     {
+//         cout << "Stack is empty." << endl;
+//     }
+// }
 
-void display(char stack[], int top)
-{
-    for (int i = top; i >= 0; i--)
-    {
-        cout << stack[i] << "\n";
-    }
-}
+// void display(string stack[], int top)
+// {
+//     for (int i = top; i >= 0; i--)
+//     {
+//         cout << stack[i] << "\n";
+//     }
+// }
 
-int main()
-{
-    int n = 5;
-    char stack[n];
-    int top = -1;
+// int main()
+// {
 
-    push(stack, n, top);
-    push(stack, n, top);
-    push(stack, n, top);
-    push(stack, n, top);
-    push(stack, n, top);
+//     int n = 2;
+//     string stack[n];
+//     int top = -1;
 
-    peek(stack, top);
+//     push(stack, n, top);
+//     push(stack, n, top);
+//     push(stack, n, top);
+//     push(stack, n, top);
+//     push(stack, n, top);
 
-    push(stack, n, top);
+//     peek(stack, top);
 
-    cout << endl;
+//     push(stack, n, top);
 
-    pop(stack, n, top);
-    pop(stack, n, top);
-    pop(stack, n, top);
-    pop(stack, n, top);
-    pop(stack, n, top);
-       pop(stack, n, top);
-          pop(stack, n, top);
-             pop(stack, n, top);
-    cout << endl;
-    return 0;
-}
+//     cout << endl;
+
+//     cout << endl;
+
+//     pop(stack, n, top);
+//     pop(stack, n, top);
+
+//     pop(stack, n, top);
+//     pop(stack, n, top);
+
+//     cout << endl;
+//     return 0;
+// }
+
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////
+
+// #include <iostream>
+// using namespace std;
+
+// // Stack implementation using CHAR Data type.
+
+// void push(char stack[], int &n, int &top)
+// {
+//     if (top == n - 1)
+//     {
+//         cout << "Stack is full" << endl;
+//     }
+//     else
+//     {
+//         top++;
+//         cout << "Enter the Character in stack: ";
+//         cin >> stack[top];
+//     }
+// }
+
+// void pop(char stack[], int n, int &top)
+// {
+//     if (top == -1)
+//     {
+//         cout << "Stack is Empty.\n";
+//     }
+//     else
+//     {
+//         cout << "Stack had freed the character: " << stack[top--] << "\n";
+//     }
+// }
+
+// void peek(char stack[], int top)
+// {
+//     if (top != -1)
+//     {
+//         cout << stack[top] << endl;
+//     }
+//     else
+//     {
+//         cout << "Stack is empty." << endl;
+//     }
+// }
+
+// void display(char stack[], int top)
+// {
+//     for (int i = top; i >= 0; i--)
+//     {
+//         cout << stack[i] << "\n";
+//     }
+// }
+
+// int main()
+// {
+//     int n = 5;
+//     char stack[n];
+//     int top = -1;
+
+//     push(stack, n, top);
+//     push(stack, n, top);
+//     push(stack, n, top);
+//     push(stack, n, top);
+//     push(stack, n, top);
+
+//     peek(stack, top);
+
+//     push(stack, n, top);
+
+//     cout << endl;
+
+//     pop(stack, n, top);
+//     pop(stack, n, top);
+//     pop(stack, n, top);
+//     pop(stack, n, top);
+//     pop(stack, n, top);
+//        pop(stack, n, top);
+//           pop(stack, n, top);
+//              pop(stack, n, top);
+//     cout << endl;
+//     return 0;
+// }
