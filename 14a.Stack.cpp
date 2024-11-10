@@ -1,22 +1,19 @@
 #include <iostream>
-
 using namespace std;
 
-int n = 5;
-int stack[5];
+const int n = 5;
+int stack[n];
 int top = -1;
 
-void push()
+void push(int value)
 {
     if (top == n - 1)
     {
-        cout << "Stack is full" << endl;
+        cout << "Stack is Overflow.\n";
     }
     else
     {
-        top++;
-        cout << "Enter the Value in stack: ";
-        cin >> stack[top];
+        stack[++top] = value;
     }
 }
 
@@ -24,60 +21,68 @@ void pop()
 {
     if (top == -1)
     {
-        cout << "Array is Empty.\n";
+        cout << "Stack is Underflow.\n";
     }
     else
     {
-        stack[--top];
+        cout << "popped value: " << stack[top--] << endl;
     }
 }
 
 void peek()
 {
-    if (top != -1)
+    if (top == -1)
     {
-        cout << stack[top] << endl;
+        cout << "Stack is Empty.\n";
     }
     else
     {
-        cout << "Stack is empty." << endl;
+        cout << stack[top] << endl;
     }
 }
 
-void display()
+void show()
 {
-    for (int i = top; i >= 0; i--)
+    if (top == -1)
     {
-        cout << stack[i] << " ";
+        cout << "Stack is Empty.\n";
+    }
+    else
+    {
+        for (int i = top; i >= 0; i--)
+        {
+            cout << stack[i] << " ";
+        }
+        cout << endl;
     }
 }
 
 int main()
 {
-    push();
-    push();
-    push();
-    push();
-    push();
-    ///////
-    peek();
-    ///////
-    push();
-    ///////
-    display();
+    show();
 
-    cout << endl;
-
-    display();
-
-    cout << endl;
+    push(1);
+    push(2);
+    push(3);
+    push(4);
+    push(5);
+    push(6);
 
     peek();
+
+    show();
+
+    pop();
+    pop();
+    show();
+    pop();
+    pop();
+    pop();
+    pop();
 
     cout << endl;
     return 0;
 }
-
 // ////////////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////////////
