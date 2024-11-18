@@ -1,32 +1,75 @@
 #include <iostream>
 using namespace std;
 
+int CircularQueue[5];
+int rear = -1, front = 0, qsize = 5, count = 0;
+
+void insertq(int value)
+{
+    if (count == qsize)
+    {
+        cout << "Queue is Overflow.\n";
+    }
+    else
+    {
+        rear++;
+        rear = rear % qsize;
+        CircularQueue[rear] = value;
+        count++;
+        cout << "Value: " << value << " add to queue.\n";
+    }
+}
+
+void delq()
+{
+    if (count == 0)
+    {
+        cout << "Queue is underflow.\n";
+    }
+    else
+    {
+        cout << "Remove value: " << CircularQueue[front] << endl;
+        front++;
+        front = front % qsize;
+        count--;
+    }
+}
+
+void show()
+{
+    if (count == 0)
+    {
+        cout << "Queue is empty.\n";
+        return;
+    }
+    cout << "Elements in the circular queue are: ";
+    for (int i = 0; i < count; i++)
+    {
+        int index = (front + i) % qsize;
+        cout << CircularQueue[index] << " ";
+    }
+    cout << endl;
+}
+
 int main()
 {
-
-    int n = 5;
-    int arr[5] = {4, 2, 3, 7, 5};
-
-    for (int start = 0; start < n; start++)
-    {
-        for (int end = start; end < n; end++)
-        {
-            for (int i = start; i < end; i++)
-            {
-                cout << arr[i];
-            }
-            cout << " ";
-        }
-
-        cout << endl;
-    }
+    insertq(56);
+    insertq(32);
+    insertq(45);
+    insertq(67);
+    insertq(89);
+    show();
+    delq();
+    delq();
+    insertq(1);
+    insertq(5);
+    show();
+    delq();
+    delq();
+    delq();
+    delq();
+    show();
 
     cout << endl;
     return 0;
 }
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
