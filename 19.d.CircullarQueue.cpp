@@ -1,201 +1,75 @@
 #include <iostream>
 using namespace std;
 
-class CircularQueue
+int CircularQueue[5];
+int rear = -1, front = 0, qsize = 5, count = 0;
+
+void insertq(int value)
 {
-private:
-    int *arr;
-    int front;
-    int rear;
-    int capacity;
-    int count;
-
-public:
-    CircularQueue(int size)
+    if (count == qsize)
     {
-        arr = new int[size];
-        capacity = size;
-        front = 0;
-        rear = -1;
-        count = 0;
+        cout << "Queue is Overflow.\n";
     }
-
-    ~CircularQueue()
+    else
     {
-        delete[] arr;
-    }
-
-    void enqueue(int x)
-    {
-        if (isFull())
-        {
-            cout << "Queue is full.\n";
-            return;
-        }
-        rear = (rear + 1) % capacity;
-        arr[rear] = x;
+        rear++;
+        rear = rear % qsize;
+        CircularQueue[rear] = value;
         count++;
-        cout << x << " added to circular queue.\n";
+        cout << "Value: " << value << " add to queue.\n";
     }
+}
 
-    int dequeue()
+void delq()
+{
+    if (count == 0)
     {
-        if (isEmpty())
-        {
-            cout << "Queue is empty.\n";
-            return -1;
-        }
-        int removed = arr[front];
-        front = (front + 1) % capacity;
+        cout << "Queue is underflow.\n";
+    }
+    else
+    {
+        cout << "Remove value: " << CircularQueue[front] << endl;
+        front++;
+        front = front % qsize;
         count--;
-        cout << removed << " removed from circular queue.\n";
-        return removed;
     }
+}
 
-    int getFront()
+void show()
+{
+    if (count == 0)
     {
-        if (isEmpty())
-        {
-            cout << "Queue is empty.\n";
-            return -1;
-        }
-        return arr[front];
+        cout << "Queue is empty.\n";
+        return;
     }
-
-    int getRear()
+    cout << "Elements in the circular queue are: ";
+    for (int i = 0; i < count; i++)
     {
-        if (isEmpty())
-        {
-            cout << "Queue is empty.\n";
-            return -1;
-        }
-        return arr[rear];
+        int index = (front + i) % qsize;
+        cout << CircularQueue[index] << " ";
     }
-
-    bool isEmpty()
-    {
-        return count == 0;
-    }
-
-    bool isFull()
-    {
-        return count == capacity;
-    }
-};
+    cout << endl;
+}
 
 int main()
 {
-    CircularQueue cqueue(5);
+    insertq(56);
+    insertq(32);
+    insertq(45);
+    insertq(67);
+    insertq(89);
+    show();
+    delq();
+    delq();
+    insertq(1);
+    insertq(5);
+    show();
+    delq();
+    delq();
+    delq();
+    delq();
+    show();
 
-    cqueue.enqueue(10);
-    cqueue.enqueue(20);
-    cqueue.enqueue(30);
-    cqueue.enqueue(40);
-    cqueue.enqueue(50);
-
-    cout << "Front element is: " << cqueue.getFront() << endl;
-    cout << "Rear element is: " << cqueue.getRear() << endl;
-
-    cqueue.dequeue();
-    cqueue.enqueue(60);
-
+    cout << endl;
     return 0;
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// #include <iostream>
-// using namespace std;
-
-// class CircularQueue
-// {
-// private:
-//     int *arr;
-//     int front;
-//     int rear;
-//     int capacity;
-
-// public:
-//     CircularQueue(int size)
-//     {
-//         arr = new int[size];
-//         capacity = size;
-//         front = rear = -1;
-//     }
-
-//     ~CircularQueue()
-//     {
-//         delete[] arr;
-//     }
-
-//     bool isFull()
-//     {
-//         return (rear + 1) % capacity == front;
-//     }
-
-//     bool isEmpty()
-//     {
-//         return front == -1;
-//     }
-
-//     void enqueue(int x)
-//     {
-//         if (isFull())
-//         {
-//             cout << "Queue is full.\n";
-//             return;
-//         }
-
-//         if (isEmpty())
-//         {
-//             front = rear = 0;
-//         }
-//         else
-//         {
-//             rear = (rear + 1) % capacity;
-//         }
-//         arr[rear] = x;
-//         cout << x << " added to the queue.\n";
-//     }
-
-//     int dequeue()
-//     {
-//         if (isEmpty())
-//         {
-//             cout << "Queue is empty.\n";
-//             return -1;
-//         }
-//         int result = arr[front];
-//         if (front == rear)
-//         {
-//             front = rear = -1;
-//         }
-//         else
-//         {
-//             front = (front + 1) % capacity;
-//         }
-//         cout << result << " removed from the queue.\n";
-//         return result;
-//     }
-
-//     int getFront()
-//     {
-//         if (isEmpty())
-//         {
-//             cout << "Queue is empty.\n";
-//             return -1;
-//         }
-//         return arr[front];
-//     }
-
-//     int getRear()
-//     {
-//         if (isEmpty())
-//         {
-//             cout << "Queue is empty.\n";
-//             return -1;
-//         }
-//         return arr[rear];
-//     }
-// };
