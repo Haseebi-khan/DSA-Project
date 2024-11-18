@@ -27,7 +27,7 @@ public:
 
     void enqueue(int x)
     {
-        if (isFull())
+        if (count == capacity)
         {
             cout << "Queue is full.\n";
             return;
@@ -40,7 +40,7 @@ public:
 
     int dequeue()
     {
-        if (isEmpty())
+        if (count == 0)
         {
             cout << "Queue is empty.\n";
             return -1;
@@ -54,7 +54,7 @@ public:
 
     int getFront()
     {
-        if (isEmpty())
+        if (count == 0)
         {
             cout << "Queue is empty.\n";
             return -1;
@@ -64,22 +64,27 @@ public:
 
     int getRear()
     {
-        if (isEmpty())
+        if (count == 0)
         {
             cout << "Queue is empty.\n";
             return -1;
         }
         return arr[rear];
     }
-
-    bool isEmpty()
+    void show()
     {
-        return count == 0;
-    }
-
-    bool isFull()
-    {
-        return count == capacity;
+        if (count == 0)
+        {
+            cout << "Queue is empty.\n";
+            return;
+        }
+        cout << "Elements in the circular queue are: ";
+        for (int i = 0; i < count; i++)
+        {
+            int index = (front + i) % capacity;
+            cout << arr[index] << " ";
+        }
+        cout << endl;
     }
 };
 
@@ -92,12 +97,14 @@ int main()
     cqueue.enqueue(30);
     cqueue.enqueue(40);
     cqueue.enqueue(50);
+    cqueue.show();
 
     cout << "Front element is: " << cqueue.getFront() << endl;
     cout << "Rear element is: " << cqueue.getRear() << endl;
 
     cqueue.dequeue();
     cqueue.enqueue(60);
+    cqueue.show();
 
     return 0;
 }
