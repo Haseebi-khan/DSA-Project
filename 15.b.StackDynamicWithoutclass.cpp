@@ -10,7 +10,7 @@ struct Node
 
 Node *Stacktop = nullptr;
 
-void insert(int value)
+void push(int value)
 {
     Node *newNode = new Node(value);
     if (Stacktop == nullptr)
@@ -24,7 +24,7 @@ void insert(int value)
     }
 }
 
-void insertAtEnd(int value)
+void insertInEnd(int value)
 {
     Node *newNode = new Node(value);
     if (Stacktop == nullptr)
@@ -41,6 +41,21 @@ void insertAtEnd(int value)
         temp->next = newNode;
     }
 }
+
+void pop()
+{
+    if (Stacktop == nullptr)
+    {
+        cout << "Empty.\n";
+    }
+    else
+    {
+        Node *temp = Stacktop;
+        Stacktop = temp->next;
+        delete temp;
+    }
+}
+
 void display()
 {
     Node *temp = Stacktop;
@@ -55,10 +70,10 @@ void display()
 int main()
 {
 
-    insert(10);
-    insert(20);
-    insertAtEnd(30);
-    insertAtEnd(40);
+    push(10);
+    push(20);
+    insertInEnd(30);
+    insertInEnd(40);
     display();
     cout << endl;
     return 0;
