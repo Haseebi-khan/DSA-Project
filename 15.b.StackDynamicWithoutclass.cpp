@@ -59,7 +59,7 @@ int main()
     insert(20);
     insertAtEnd(30);
     insertAtEnd(40);
-    display(); // Expected output: 20 10 30 40
+    display();
     cout << endl;
     return 0;
 }
