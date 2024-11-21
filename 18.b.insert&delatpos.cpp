@@ -1,59 +1,82 @@
 #include <iostream>
 using namespace std;
 
-class Node
+class node
 {
 public:
     int data;
-    Node *next;
-    Node()
-    {
-        next = nullptr;
-    }
+    node *next;
+    node(int value = 0) : data(value), next(nullptr) {}
 };
 
-class linkedList
+class linkedlist
 {
 private:
-    Node *head, *tail;
+    node *head, *tail;
 
 public:
-    linkedList()
+    linkedlist() : head(nullptr), tail(nullptr) {}
+
+    void insertAtRear(int value)
     {
-        head = tail = nullptr;
-    }
-    void add_Rear(int value)
-    {
-        Node *temp = new Node();
-        temp->data = value;
+        node *newNode = new node(value);
         if (head == nullptr)
         {
-            head = tail = temp;
+            head = tail = newNode;
         }
         else
         {
-            tail->next = temp;
-            tail = temp;
-        }
-    }
-    void add_Front(int value)
-    {
-        Node *temp = new Node();
-        temp->data = value;
-        if (head == nullptr)
-        {
-            head = tail = temp;
-        }
-        else
-        {
-            head->next = temp;
-            head = temp;
+            tail->next = newNode;
+            tail = newNode;
         }
     }
 
-    void display()
+    void insertAtFront(int value)
     {
-        Node *temp = head;
+        node *newNode = new node(value);
+        if (head == nullptr)
+        {
+            head = tail = newNode;
+        }
+        else
+        {
+            newNode->next = head;
+            head = newNode;
+        }
+    }
+
+    void insertAtPos(int value, int pos)
+    {
+        if (head == nullptr || pos <= 0)
+        {
+            insertAtFront(value);
+        }
+        else
+        {
+            node *current = head;
+            int count = 0;
+            while (current != nullptr && count < pos - 1)
+            {
+                current = current->next;
+                count++;
+            }
+            if (current == nullptr)
+            {
+                insertAtRear(value);
+            }
+            else
+            {
+                node *newNode = new node(value);
+                newNode->next = current->next;
+                current->next = newNode;
+            }
+        }
+    }
+
+    void show()
+    {
+        node *temp = head;
+        cout << "Linkedlist: ";
         while (temp != nullptr)
         {
             cout << temp->data << " ";
@@ -61,12 +84,12 @@ public:
         }
         cout << endl;
     }
-    void delete_Rear()
+
+    void deleteFromRear()
     {
-        Node *temp = tail;
         if (head == nullptr)
         {
-            cout << "Stack is underflow.\n";
+            cout << "Stack is underflow\n";
         }
         else if (head == tail)
         {
@@ -75,7 +98,7 @@ public:
         }
         else
         {
-            Node *temp = head;
+            node *temp = head;
             while (temp->next != nullptr)
             {
                 temp = temp->next;
@@ -86,9 +109,8 @@ public:
         }
     }
 
-    void delete_front()
+    void deleteFromFront()
     {
-        Node *temp = head;
         if (head == nullptr)
         {
             cout << "Already Empty.\n";
@@ -100,70 +122,41 @@ public:
         }
         else
         {
-            temp = head->next;
-            delete head;
-            head = temp;
-        }
-    }
-    void insertAtPosition(int value, int position)
-    {
-        Node *temp = new Node();
-        temp->data = value;
-
-        if (position <= 0 || head == nullptr) 
-        {
-            add_Front(value);
-        }
-        else
-        {
-            Node *current = head;
-            int currentPos = 0;
-            while (current != nullptr && currentPos < position - 1)
-            {
-                current = current->next;
-                currentPos++;
-            }
-            if (current == nullptr) 
-            {
-                add_Rear(value);
-            }
-            else
-            {
-                temp->next = current->next;
-                current->next = temp;
-            }
+            node *temp = head;
+            head = temp->next;
+            delete temp;
         }
     }
 
-    void deleteAtPosition(int position)
+    void deleteFromPos(int pos)
     {
         if (head == nullptr)
         {
-            cout << "List is empty.\n";
+            cout << "Stack underflow.\n";
         }
-        else if (position <= 0)
+        else if (pos <= 0)
         {
-            delete_front(); 
+            deleteFromFront();
         }
         else
         {
-            Node *current = head;
-            Node *previous = nullptr;
-            int currentPos = 0;
-            while (current != nullptr && currentPos < position)
+            node *current = head;
+            node *previous = nullptr;
+            int count = 0;
+            while (current != nullptr && count < pos - 1)
             {
                 previous = current;
                 current = current->next;
-                currentPos++;
+                count++;
             }
-            if (current == nullptr) 
+            if (current == nullptr)
             {
-                cout << "Position out of range.\n";
+                cout << "Out of Range.\n";
             }
             else
             {
                 previous->next = current->next;
-                if (current == tail) 
+                if (current == tail)
                 {
                     tail = previous;
                 }
@@ -172,23 +165,25 @@ public:
         }
     }
 };
+
 int main()
 {
-    linkedList list;
-    list.add_Rear(10);
-    list.add_Front(20);
-    list.add_Front(20);
-    list.add_Front(20);
-    list.add_Front(20);
-    list.display(); 
-    list.insertAtPosition(15, 1);
-    list.insertAtPosition(15, 1); 
-    list.insertAtPosition(15, 1); 
-    list.insertAtPosition(15, 1); 
-    list.display();              
 
-    list.deleteAtPosition(1); 
-    list.display();           
+    linkedlist list;
+    list.insertAtRear(10);
+    list.insertAtFront(20);
+    list.insertAtFront(20);
+    list.insertAtFront(20);
+    list.insertAtFront(20);
+    list.show();
+    list.insertAtPos(15, 1);
+    list.insertAtPos(15, 1);
+    list.insertAtPos(15, 1);
+    list.insertAtPos(15, 1);
+    list.show();
+
+    list.deleteFromPos(1);
+    list.show();
 
     cout << endl;
     return 0;
