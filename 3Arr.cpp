@@ -6,34 +6,33 @@ using namespace std;
 
 int main()
 {
-       const int size = 10;
-    
+    const int size = 10;
+
     char cha = 10;
     int ch = cha;
 
     cout << static_cast<int>(cha) << "\n";
 
-
-    array < char, size > arr5;
+    array<char, size> arr5;
 
     for (int i = 0; i < size; i++)
     {
-        arr5.at(i) = '0' + (i + 1);  /// Assci of 1 = 49
+        arr5.at(i) = '0' + (i + 1); /// Assci of 1 = 49
     }
     cout << endl;
     cout << endl;
 
-    for(const auto& str : arr5)
+    for (const auto &str : arr5)
     {
         cout << static_cast<int>(str) << " ";
     }
     cout << endl;
     cout << '\n';
-        for(const auto& str : arr5)
+    for (const auto &str : arr5)
     {
         cout << static_cast<int>(str) << " ";
     }
-    
+
     cout << endl;
 
     array<string, 3> arr;

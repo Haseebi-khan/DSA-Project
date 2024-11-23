@@ -84,6 +84,6 @@ int main ()
     cout << arr.data() << '\n';
     
     array <char, size> str2;
-    memcpy(str2, arr, size);
+    // memcpy(str2, arr, size);
     return 0;
 }
