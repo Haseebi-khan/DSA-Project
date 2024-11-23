@@ -4,7 +4,7 @@ using namespace std;
 int CircularQueue[5];
 int rear = -1, front = 0, qsize = 5, count = 0;
 
-void insertq(int value)
+void enQueue(int value)
 {
     if (count == qsize)
     {
@@ -20,7 +20,7 @@ void insertq(int value)
     }
 }
 
-void delq()
+void deQueue()
 {
     if (count == 0)
     {
@@ -53,21 +53,25 @@ void show()
 
 int main()
 {
-    insertq(56);
-    insertq(32);
-    insertq(45);
-    insertq(67);
-    insertq(89);
+    enQueue(50);
+    enQueue(5);
+    enQueue(30);
+    enQueue(10);
+    enQueue(65);
     show();
-    delq();
-    delq();
-    insertq(1);
-    insertq(5);
+
+    deQueue();
+    deQueue();
+    enQueue(3);
+    enQueue(1);
     show();
-    delq();
-    delq();
-    delq();
-    delq();
+
+    deQueue();
+    deQueue();
+    deQueue();
+    deQueue();
+    deQueue();
+    deQueue();
     show();
 
     cout << endl;
