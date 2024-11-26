@@ -3,7 +3,6 @@ using namespace std;
 
 // Implement the delete operation to remove a specific node
 // in a circular linked list by value or position
-
 // Circular Linked List (CLL)
 
 class node
@@ -15,8 +14,6 @@ public:
     node(int value = 0) : data(value), next(nullptr), pre(nullptr) {}
 };
 
-// 1 - Implement a simple Circular linked list
-//     where you can perform basic operations like
 class doublyLinkedList
 {
 private:
@@ -29,6 +26,40 @@ public:
         while (head != nullptr)
         {
             deleteFromBeginning();
+        }
+    }
+
+    // Implement the delete operation to remove a specific node
+    // in a circular linked list by value or position
+
+    void insertAtPostion(int value, int pos)
+    {
+        if (head == nullptr || pos <= 0)
+        {
+            insertAtBeginning(value);
+            return;
+        }
+
+        node *current = head;
+        int iteration = 0;
+        while (current->next != nullptr && iteration < pos)
+        {
+            current = current->next;
+            iteration++;
+        }
+
+        if (current == head)
+        {
+            insertAtEnd(value);
+        }
+        else
+        {
+            node *newNode = new node(value);
+
+            newNode->next = current;
+            current->pre->next = newNode;
+            newNode->pre = current->pre;
+            current->pre = newNode;
         }
     }
 
@@ -45,10 +76,6 @@ public:
         }
         else
         {
-            // newNode->next =head;
-            // newNode->pre = tail;
-            // head = newNode;
-
             newNode->next = head;
             newNode->pre = tail;
             head->pre = newNode;
@@ -60,6 +87,7 @@ public:
     void insertAtEnd(int value)
     {
         node *newNode = new node(value);
+
         if (head == nullptr)
         {
             head = tail = newNode;
@@ -68,18 +96,11 @@ public:
         }
         else
         {
-            // tail->next = newNode;
-            // newNode->pre = tail;
-            // newNode->next = head;
-            // tail = newNode;
-
             tail->next = newNode;
             newNode->pre = tail;
-            newNode->next = head;
-            head->pre = newNode;
-            tail->next = newNode;
-            head->pre = newNode;
             tail = newNode;
+            head->pre = tail;
+            tail->next = head;
         }
     }
 
@@ -94,15 +115,10 @@ public:
         if (head == tail)
         {
             delete head;
-            // doublyLinkedList();
             head = tail = nullptr;
         }
         else
         {
-            // node *temp = head;
-            // head = head->next;
-            // head->pre = tail;
-            // delete temp;
 
             node *temp = head;
             head = head->next;
@@ -122,15 +138,10 @@ public:
         if (head == tail)
         {
             delete head;
-            // doublyLinkedList();
             head = tail = nullptr;
         }
         else
         {
-            // node *temp = tail;
-            // tail = tail->pre;
-            // tail->next = head;
-            // delete temp;
 
             node *temp = tail;
             tail = tail->pre;
@@ -164,21 +175,15 @@ int main()
 {
     doublyLinkedList dLinkedList;
 
+    dLinkedList.insertAtBeginning(20);
     dLinkedList.insertAtEnd(1);
     dLinkedList.insertAtEnd(2);
     dLinkedList.insertAtEnd(3);
     dLinkedList.insertAtEnd(4);
     dLinkedList.insertAtEnd(5);
-    dLinkedList.insertAtBeginning(20);
     dLinkedList.Display();
 
-    dLinkedList.deleteFromBeginning();
-    dLinkedList.Display();
-
-    dLinkedList.deleteFromEnd();
-    dLinkedList.Display();
-
-    dLinkedList.deleteFromBeginning();
+    dLinkedList.insertAtPostion(10, 3);
     dLinkedList.Display();
 
     cout << endl;
