@@ -1,0 +1,28 @@
+include <iostream>
+#include <X11/Xlib.h>
+#include <GL/gl.h>
+#include <GL/glx.h>
+#include <X11/Xutil.h>
+#include <cstdio>
+
+// for building cpp file.
+g++ -fdiagnostics-color=always -g -std=c++20 /home/noneo/Desktop/codes/DSA-Project/main.cpp -o /home/noneo/Desktop/codes/DSA-Project/run.exe -lX11 -lGL -lGLU -lpthread
+
+
+
+
+#include <GL/gl.h>
+#include <GL/glx.h>
+#include <X11/Xlib.h>
+#include <iostream>
+
+int main() {
+    Display* display = XOpenDisplay(NULL);
+    if (!display) {
+        std::cerr << "Unable to open X display.\n";
+        return 1;
+    }
+    std::cout << "X display opened successfully.\n";
+    XCloseDisplay(display);
+    return 0;
+}
