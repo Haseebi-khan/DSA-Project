@@ -30,36 +30,6 @@ public:
         }
     }
 
-    // Search for a node with a given value and
-    // delete it from the doubly linked list.
-
-    void searchData__Delete(int value)
-    {
-        if (head == nullptr)
-        {
-            cout << "Linklist is empty." << endl;
-            return;
-        }
-        bool found = false;
-        node *current = head;
-        while (current != nullptr)
-        {
-            if (current->data == value)
-            {
-                cout << "Value " << current->data << " is going to delete." << endl;
-                found = true;
-                break;
-            }
-            current = current->next;
-        }
-
-        if (found)
-        {
-            node *temp = current->pre;
-            temp->next = current->next;
-            delete current;
-        }
-    }
 
     // Implement a function to reverse the entire doubly linked list
     // without using extra space.

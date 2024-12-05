@@ -74,7 +74,7 @@ public:
     }
     void deleteFromEnd_()
     {
-        if (head == nullptr) 
+        if (head == nullptr)
         {
             cout << "Empty\n";
             return;
@@ -93,8 +93,30 @@ public:
             temp = temp->next;
         }
 
-        delete temp->next;    
-        temp->next = nullptr; 
+        delete temp->next;
+        temp->next = nullptr;
+    }
+
+    void reverseIteration()
+    {
+        if (head == nullptr || head->next == nullptr)
+        {
+            return;
+        }
+
+        node *prev = head;
+        node *curr = head->next;
+
+        while (curr != nullptr)
+        {
+            node *NextNode = curr->next;
+            curr->next = prev;
+
+            prev = curr;
+            curr = NextNode;
+        }
+        head->next = nullptr;
+        head = prev;
     }
 
     void show()
@@ -119,12 +141,10 @@ public:
             cout << "List is empty.\n";
             return;
         }
-        
+
         node *temp = head;
         head = head->next;
         delete temp;
-
-        
     }
 };
 
@@ -146,13 +166,19 @@ int main()
     list.show();
 
     cout << "Working well.\n";
+    cout << endl;
 
-    // Delete from end;
+    cout << "Delete from End: ";
     list.deleteFromEnd();
     list.show();
 
-    // Delete from head;
+    cout << "Delete from head: ";
     list.deleteFromHead();
+    list.show();
+
+    cout << "Reverse Iteration: ";
+
+    list.reverseIteration();
     list.show();
 
     cout << endl;

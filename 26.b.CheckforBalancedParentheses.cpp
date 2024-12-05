@@ -117,7 +117,7 @@ bool validationParentheses(const string &str)
 int main()
 {
 
-    string a = "(a){a+3}[4(3)+{2(2+3)-2}+1]";
+    string a = "(){}[(){()}]";
     string b = "[(}]";
 
     if (validationParentheses(a))
