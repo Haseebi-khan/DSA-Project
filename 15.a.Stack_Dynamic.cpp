@@ -7,6 +7,7 @@ public:
     int data;
     Node *next;
 };
+
 class stack
 {
 private:
@@ -85,7 +86,6 @@ int main()
     arr.push(3);
     arr.push(4);
     arr.push(5);
-    arr.push('+');
     arr.display();
 
     arr.pop();

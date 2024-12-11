@@ -41,7 +41,7 @@ int main()
 
     display(arr, size);
 
-    index = 5;
+    index = 2;
     element = 999;
     insertionArray(arr, size, element, 10, index - 1);
 

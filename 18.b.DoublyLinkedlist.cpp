@@ -68,7 +68,7 @@ public:
         }
         else if (head == tail)
         {
-            delete head, tail;
+            delete head;
             head = tail = nullptr;
         }
         else

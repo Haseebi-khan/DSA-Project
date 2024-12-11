@@ -108,7 +108,7 @@ int main()
 
     dLinkedList.reverseDLL();
 
-    dLinkedList.searchData__Delete(5);
+    // dLinkedList.searchData__Delete(5);
 
     dLinkedList.Display();
 

@@ -56,6 +56,17 @@ void pop()
     }
 }
 
+int peek()
+{
+    if (Stacktop == nullptr)
+    {
+        cout << "Stack is empty.\n";
+        return -1;
+    }
+
+    return Stacktop->data;
+}
+
 void display()
 {
     Node *temp = Stacktop;

@@ -1,86 +1,86 @@
-#include <iostream>
-using namespace std;
-class Person
-{
-private:
-    string name;
-    int age;
+// #include <iostream>
+// using namespace std;
+// class Person
+// {
+// private:
+//     string name;
+//     int age;
 
-public:
-    Person(string a, int b)
-    {
-        name = a;
-        age = b;
-    }
-    void display()
-    {
-        cout << "Name : " << name << endl;
-        cout << "Age : " << age << endl;
-    }
-    ~Person()
-    {
-        cout << "The object is succesfully destoryed" << endl;
-    }
-};
-class Student : protected Person
-{
-private:
-    int Rollnumber;
-    string courses;
+// public:
+//     Person(string a, int b)
+//     {
+//         name = a;
+//         age = b;
+//     }
+//     void display()
+//     {
+//         cout << "Name : " << name << endl;
+//         cout << "Age : " << age << endl;
+//     }
+//     ~Person()
+//     {
+//         cout << "The object is succesfully destoryed" << endl;
+//     }
+// };
+// class Student : protected Person
+// {
+// private:
+//     int Rollnumber;
+//     string courses;
 
-public:
-    Student(string name, int age, int Roll, string course) : Person(name, age) // list initializeation
-    {
-        // ::Person(name,age);
-        Rollnumber = Roll;
-        courses = course;
-    }
-    void display()
-    {
-        Person::display();
-        cout << "Roll No: " << Rollnumber << endl;
-        cout << "Course : " << courses << endl;
-    }
-    ~Student()
-    {
-        cout << "The object is succesfully destroyed" << endl;
-    }
-};
+// public:
+//     Student(string name, int age, int Roll, string course) : Person(name, age) // list initializeation
+//     {
+//         // ::Person(name,age);
+//         Rollnumber = Roll;
+//         courses = course;
+//     }
+//     void display()
+//     {
+//         Person::display();
+//         cout << "Roll No: " << Rollnumber << endl;
+//         cout << "Course : " << courses << endl;
+//     }
+//     ~Student()
+//     {
+//         cout << "The object is succesfully destroyed" << endl;
+//     }
+// };
 
-class ResearchStudent : public Student
-{
-private:
-    string researchTopic;
+// class ResearchStudent : public Student
+// {
+// private:
+//     string researchTopic;
 
-public:
-    ResearchStudent(string name, int age, int Roll, string course, string restopic) : Student(name, age, Roll, course)
-    {
-        // Student::Student(name, age, Roll, course);
-        researchTopic = restopic;
-    }
-    void display()
-    {
-        Student::display();
-        cout << "The Research Topic : " << researchTopic << endl;
-    }
-    ~ResearchStudent()
-    {
-        cout << "The object is successfully destoryed" << endl;
-    }
-};
-int main()
-{
-    ResearchStudent obj("Abubakar Orakzai", 20, 07, "CS", "Generative AI ");
-    obj.display();
-    cout << endl;
-    cout << endl;
-    cout << endl;
-    cout << endl;
-    cout << endl;
-    cout << "Destruction " << endl;
+// public:
+//     ResearchStudent(string name, int age, int Roll, string course, string restopic) : Student(name, age, Roll, course)
+//     {
+//         // Student::Student(name, age, Roll, course);
+//         researchTopic = restopic;
+//     }
+//     void display()
+//     {
+//         Student::display();
+//         cout << "The Research Topic : " << researchTopic << endl;
+//     }
+//     ~ResearchStudent()
+//     {
+//         cout << "The object is successfully destoryed" << endl;
+//     }
+// };
+// int main()
+// {
+//     ResearchStudent obj("Abubakar Orakzai", 20, 07, "CS", "Generative AI ");
+//     obj.display();
+//     cout << endl;
+//     cout << endl;
+//     cout << endl;
+//     cout << endl;
+//     cout << endl;
+//     cout << "Destruction " << endl;
 
-    return 0;
-}
+//     return 0;
+// }
 
 // =================================
 
@@ -110,10 +110,29 @@ int main()
 //     // Define the array of values
 //     double values[] = {
 
-//         3.79, 2.99, 2.77, 2.91, 3.10, 1.84, 2.52, 3.22,
-//         2.45, 2.14, 2.67, 2.52, 2.71, 2.75, 3.57, 3.85,
-//         3.36, 2.05, 2.89, 2.83, 3.13, 2.44, 2.10, 3.71,
-//         3.14, 3.54, 2.37, 2.68, 3.51, 3.37
+//         17, 20, 10,
+//         9, 23, 13, 12, 19, 18, 24,
+//         12, 14,
+//         6,
+//         9, 13,
+//         6,
+//         7, 10, 13,
+//         7,
+//         16, 18,
+//         8, 13,
+//         3, 32,
+//         9,
+//         7, 10, 11,
+//         13,
+//         7, 18,
+//         7, 10,
+//         4, 27, 19, 16,
+//         8,
+//         7, 10,
+//         5, 14, 15, 10,
+//         9,
+//         6,
+//         7, 15
 
 //     };
 
@@ -121,7 +140,7 @@ int main()
 //     int totalElements = sizeof(values) / sizeof(values[0]);
 
 //     // Sorting arr
-//     sort(values,totalElements);
+//     sort(values, totalElements);
 
 //     // Calculate the mean
 //     double mean = 0.0;

@@ -61,23 +61,63 @@ public:
             cout << endl;
         }
     }
+    void shortStack()
+    {
+        if (top == -1)
+        {
+            cout << "Empty.\n";
+            return;
+        }
+
+        for (int i = 0; i < top + 1; i++)
+        {
+            for (int j = 0; j < top + 1; j++)
+            {
+                if (arr[i] > arr[j])
+                {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+    }
+    void reverse()
+    {
+        if (top == -1)
+        {
+            cout << "Stack is Empty. Cannot reverse.\n";
+            return;
+        }
+        int temptop = top;
+        for (int i = 0; i < top / 2; i++)
+        {
+            int temp = arr[i];
+            arr[i] = arr[temptop];
+            arr[temptop] = temp;
+            temptop--;
+        }
+    }
 };
 
 int main()
 {
-
-    stack arr(5);
-
-    for (int i = 0; i < 5; i++)
-    {
-        arr.push(i + 1);
-    }
-    arr.show();
-
-    arr.pop();
-    arr.pop();
-    arr.show();
-    arr.pop();
+    stack s(5);
+    s.push(47);
+    s.push(34);
+    s.push(3);
+    s.push(2);
+    s.push(45);
+    s.push(1);
+    s.push(3324);
+    cout << "Stack Data: ";
+    s.show();
+    cout << "Sorted Stack: ";
+    s.shortStack();
+    s.show();
+    cout << "Reverse Stack: ";
+    s.reverse();
+    s.show();
 
     cout << endl;
     return 0;

@@ -56,11 +56,10 @@ public:
         }
         else
         {
-            cout << "List: ";
             Node *temp = head;
             while (temp != nullptr)
             {
-                cout << temp->data << "->";
+                cout << temp->data << " ";
                 temp = temp->next;
             }
             cout << endl;
@@ -104,6 +103,20 @@ public:
             temp->next = nullptr;
         }
     }
+    void check()
+    {
+        cout << "0000000000000000000000000000000000000000000" << endl;
+        Node *temp = head;
+        cout << "Address check: ";
+        cout << temp->next->next << endl;
+        cout << "0000000000000000000000000000000000000000000" << endl;
+        while (temp != nullptr)
+        {
+            cout << temp << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
 
     void deletePosition(int index)
     {
@@ -140,58 +153,48 @@ public:
             delete curr;
         }
     }
-
-    void SwappingPority(int Mcount, int NCount)
-    {
-        Node *newhead = head;
-        Node *M = head;
-        int count = 0;
-        while (M != nullptr && count < Mcount - 1)
-        {
-            M = M->next;
-            count++;
-        }
-        Node *N = nullptr;
-        bool firstHead = true;
-        while (M != nullptr)
-        {
-            for (int i = NCount; i >= 0; i--)
-            {
-                N = M->next;
-                Node *temp = N->next;
-                if (firstHead)
-                {
-                    N->next = newhead;
-                    M->next = temp;
-                    head = newhead;
-                    newhead = newhead->next;
-                    firstHead = false;
-                }
-                N->next = newhead;
-                M->next = temp;
-                newhead = newhead->next;
-            }
-        }
-    }
 };
 
 int main()
 {
 
     SinglyLinkedList s;
-
-    s.insertAtEnd(1);
-    s.insertAtEnd(2);
-    s.insertAtEnd(3);
-    s.insertAtEnd(4);
-    s.insertAtEnd(5);
-    s.insertAtEnd(6);
-    s.insertAtEnd(7);
-    s.insertAtEnd(8);
-    s.insertAtEnd(9);
-    s.insertAtEnd(10);
+    s.insertAtFront(34);
+    s.insertAtFront(45);
+    s.insertAtFront(3);
+    s.insertAtFront(98);
+    s.insertAtFront(33);
     s.show();
-    s.SwappingPority(3, 2);
+    s.insertAtEnd(11);
+    s.insertAtEnd(22);
+    s.insertAtEnd(33);
+    s.insertAtEnd(44);
+    s.insertAtEnd(55);
+    s.insertAtEnd(66);
+    s.insertAtEnd(77);
+    s.insertAtEnd(88);
+    s.show();
+    s.deleteFromHead();
+    s.deleteFromHead();
+    s.deleteFromHead();
+    s.deleteFromHead();
+    s.deleteFromHead();
+
+    s.show();
+    cout << "==============================================.\n";
+
+    s.deletePosition(1);
+    // s.show();
+    cout << "Asdsadasdasd.\n";
+    s.show();
+
+    // s.check();
+
+    // s.deleteFromTail();
+    // s.deleteFromTail();
+    // s.deleteFromTail();
+
+    // s.show();
 
     cout << endl;
     return 0;

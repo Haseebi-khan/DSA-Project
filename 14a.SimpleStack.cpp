@@ -25,7 +25,7 @@ void pop()
     }
     else
     {
-        cout << "popped value: " << stack[top--] << endl;
+        cout << "Popped value: " << stack[top--] << endl;
     }
 }
 
@@ -37,7 +37,7 @@ void peek()
     }
     else
     {
-        cout << stack[top] << endl;
+        cout << "Top value: " << stack[top] << endl;
     }
 }
 
@@ -57,32 +57,85 @@ void show()
     }
 }
 
+int size()
+{
+    return top + 1;
+}
+
+void clear()
+{
+    top = -1;
+    cout << "Stack has been cleared.\n";
+}
+
+void reverse()
+{
+    if (top == -1)
+    {
+        cout << "Stack is Empty. Cannot reverse.\n";
+        return;
+    }
+    int temptop = top;
+    for (int i = 0; i < top / 2; i++)
+    {
+        int temp = stack[i];
+        stack[i] = stack[temptop];
+        stack[temptop] = temp;
+        temptop--;
+    }
+}
+
+void sortStack()
+{
+    if (top == -1)
+    {
+        cout << "Stack is Empty. Cannot sort.\n";
+        return;
+    }
+    for (int i = 0; i < top + 1; i++)
+    {
+        for (int j = 0; j < top + 1; j++)
+        {
+            if (stack[i] > stack[j])
+            {
+                int temp = stack[i];
+                stack[i] = stack[j];
+                stack[j] = temp;
+            }
+        }
+    }
+}
+
 int main()
 {
     show();
-
     push(1);
     push(2);
-    push(3);
-    push(4);
+    push(45);
+    push(33);
     push(5);
-    push(6);
-
     peek();
 
+    cout << "Stack list: ";
     show();
 
-    pop();
-    pop();
+    cout << "Sort Stack: ";
+    sortStack();
     show();
-    pop();
-    pop();
-    pop();
-    pop();
 
-    cout << endl;
+    cout << "Before Reverse Stack: ";
+    show();
+
+    cout << "Reverse Stack: ";
+    reverse();
+    show();
+
+    clear();
+    show();
+
     return 0;
 }
+
 // ////////////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////////////
