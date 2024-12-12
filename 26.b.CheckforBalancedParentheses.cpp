@@ -94,9 +94,7 @@ bool validationParentheses(const string &str)
             {
                 return false;
             }
-            if ((top->data == '(' && ch == ')') ||
-                (top->data == '{' && ch == '}') ||
-                (top->data == '[' && ch == ']'))
+            if ((top->data == '(' && ch == ')') || (top->data == '{' && ch == '}') || (top->data == '[' && ch == ']'))
             {
                 pop();
             }
