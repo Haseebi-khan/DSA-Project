@@ -135,5 +135,7 @@ int main()
         cout << "Invaild String.\n";
     }
 
+    cout << endl;
+
     return 0;
 }
