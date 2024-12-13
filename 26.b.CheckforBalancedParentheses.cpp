@@ -38,7 +38,7 @@ void pop()
         delete temp;
     }
 }
-char peek() 
+char peek()
 {
     if (top == nullptr)
     {
@@ -67,52 +67,52 @@ void show()
     cout << "\n";
 }
 
+void CheckForBalanceOfParantheses(string const &s, int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        if (s[i] == '(' || s[i] == '{' || s[i] == '[')
+        {
+            push(s[i]);
+        }
+        else if (s[i] == ')' || s[i] == '}' || s[i] == ']')
+        {
+            if (top == nullptr)
+            {
+                cout << "Parantheses are not Balance.\n";
+                return;
+            }
+            if (peek() == '(' && s[i] == ')' || peek() == '{' && s[i] == '}' || peek() == '[' && s[i] == ']')
+            {
+                pop();
+            }
+            else
+            {
+                cout << "Parantheses are not Balance.\n";
+                return;
+            }
+        }
+    }
+    if (top == nullptr)
+    {
+        cout << "Parantheses are Balance.\n";
+    }
+    else
+    {
+        cout << "Parantheses are not Balance.\n";
+    }
+}
+
 int main()
 {
-
-
-
-
-
+    string s = "[{()}";
+    string s2 = "()()";
+    string s3 = "()[()]";
+    CheckForBalanceOfParantheses(s3, s3.length());
 
     cout << endl;
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -257,5 +257,3 @@ int main()
 
 //     return 0;
 // }
-
-
