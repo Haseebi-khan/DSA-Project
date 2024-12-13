@@ -1,24 +1,20 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 struct Node
 {
-    char data;
-    int count = 0;
+    char Data;
     Node *next;
-    Node()
-    {
-        next = nullptr;
-    }
+    Node(char d) : Data(d), next(nullptr) {}
 };
 
 Node *top = nullptr;
 
 void push(char ch)
 {
-    Node *newNode = new Node;
-    newNode->data = ch;
-    newNode->count++;
+    Node *newNode = new Node(ch);
+
     if (top == nullptr)
     {
         top = newNode;
@@ -28,114 +24,238 @@ void push(char ch)
         newNode->next = top;
         top = newNode;
     }
-    cout << "Pushed: " << ch << endl;
 }
-
 void pop()
 {
     if (top == nullptr)
     {
-        cout << "UnderFlow\n";
+        cout << "Stack is UnderFlow.\n";
     }
     else
     {
-        char ch = top->data;
         Node *temp = top;
         top = top->next;
         delete temp;
-        cout << "Popped: " << ch << endl;
     }
 }
-
-void display()
+char peek() 
 {
     if (top == nullptr)
     {
         cout << "Stack is empty.\n";
+        return '\0';
     }
     else
     {
-        Node *temp = top;
-        cout << "Stack elements: ";
-        while (temp != nullptr)
-        {
-            cout << temp->data << " ";
-            temp = temp->next;
-        }
-        cout << endl;
+        return top->Data;
     }
 }
 
-// Valid Parentheses in an Expression
-// Last Updated : 16 Sep, 2024
-// Given an expression string s, write a program to examine whether the pairs and the orders of “{“, “}”, “(“, “)”, “[“, “]” are correct in the given expression.
-
-// Example:
-
-// Input: s = “[()]{}{[()()]()}”
-// Output: true
-// Explanation: All the brackets are well-formed
-
-// Input: s = “[(])”
-// Output: false
-// Explanation: 1 and 4 brackets are not balanced because
-// there is a closing ‘]’ before the closing ‘(‘
-bool validationParentheses(const string &str)
+void show()
 {
-    for (char ch : str)
+    if (top == nullptr)
     {
-        if (ch == '(' || ch == '{' || ch == '[')
-        {
-            push(ch);
-        }
-        else
-        {
-            if (top == nullptr)
-            {
-                return false;
-            }
-            if ((top->data == '(' && ch == ')') || (top->data == '{' && ch == '}') || (top->data == '[' && ch == ']'))
-            {
-                pop();
-            }
-            else
-            {
-                return false;
-            }
-        }
+        cout << "Stack is empty.\n";
+        return;
     }
-    bool isValid = (top == nullptr);
-    while (top != nullptr)
+    Node *temp = top;
+    while (temp != nullptr)
     {
-        pop();
+        cout << temp->Data << " ";
+        temp = temp->next;
     }
-    return isValid;
+    cout << "\n";
 }
 
 int main()
 {
 
-    string a = "(){}[(){()}]";
-    string b = "[(}]";
 
-    if (validationParentheses(a))
-    {
-        cout << "Vaild string.\n";
-    }
-    else
-    {
-        cout << "Invaild String.\n";
-    }
-    if (validationParentheses(b))
-    {
-        cout << "Vaild string.\n";
-    }
-    else
-    {
-        cout << "Invaild String.\n";
-    }
+
+
+
 
     cout << endl;
-
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// #include <iostream>
+// using namespace std;
+
+// struct Node
+// {
+//     char data;
+//     int count = 0;
+//     Node *next;
+//     Node()
+//     {
+//         next = nullptr;
+//     }
+// };
+
+// Node *top = nullptr;
+
+// void push(char ch)
+// {
+//     Node *newNode = new Node;
+//     newNode->data = ch;
+//     newNode->count++;
+//     if (top == nullptr)
+//     {
+//         top = newNode;
+//     }
+//     else
+//     {
+//         newNode->next = top;
+//         top = newNode;
+//     }
+//     cout << "Pushed: " << ch << endl;
+// }
+
+// void pop()
+// {
+//     if (top == nullptr)
+//     {
+//         cout << "UnderFlow\n";
+//     }
+//     else
+//     {
+//         char ch = top->data;
+//         Node *temp = top;
+//         top = top->next;
+//         delete temp;
+//         cout << "Popped: " << ch << endl;
+//     }
+// }
+
+// void display()
+// {
+//     if (top == nullptr)
+//     {
+//         cout << "Stack is empty.\n";
+//     }
+//     else
+//     {
+//         Node *temp = top;
+//         cout << "Stack elements: ";
+//         while (temp != nullptr)
+//         {
+//             cout << temp->data << " ";
+//             temp = temp->next;
+//         }
+//         cout << endl;
+//     }
+// }
+
+// // Valid Parentheses in an Expression
+// // Last Updated : 16 Sep, 2024
+// // Given an expression string s, write a program to examine whether the pairs and the orders of “{“, “}”, “(“, “)”, “[“, “]” are correct in the given expression.
+
+// // Example:
+
+// // Input: s = “[()]{}{[()()]()}”
+// // Output: true
+// // Explanation: All the brackets are well-formed
+
+// // Input: s = “[(])”
+// // Output: false
+// // Explanation: 1 and 4 brackets are not balanced because
+// // there is a closing ‘]’ before the closing ‘(‘
+// bool validationParentheses(const string &str)
+// {
+//     for (char ch : str)
+//     {
+//         if (ch == '(' || ch == '{' || ch == '[')
+//         {
+//             push(ch);
+//         }
+//         else
+//         {
+//             if (top == nullptr)
+//             {
+//                 return false;
+//             }
+//             if ((top->data == '(' && ch == ')') || (top->data == '{' && ch == '}') || (top->data == '[' && ch == ']'))
+//             {
+//                 pop();
+//             }
+//             else
+//             {
+//                 return false;
+//             }
+//         }
+//     }
+//     bool isValid = (top == nullptr);
+//     while (top != nullptr)
+//     {
+//         pop();
+//     }
+//     return isValid;
+// }
+
+// int main()
+// {
+
+//     string a = "(){}[(){()}]";
+//     string b = "[(}]";
+
+//     if (validationParentheses(a))
+//     {
+//         cout << "Vaild string.\n";
+//     }
+//     else
+//     {
+//         cout << "Invaild String.\n";
+//     }
+//     if (validationParentheses(b))
+//     {
+//         cout << "Vaild string.\n";
+//     }
+//     else
+//     {
+//         cout << "Invaild String.\n";
+//     }
+
+//     cout << endl;
+
+//     return 0;
+// }
+
+
