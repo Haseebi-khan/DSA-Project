@@ -11,6 +11,16 @@ struct Node
 
 Node *top = nullptr;
 
+void emptyTheStack()
+{
+    while (top != nullptr)
+    {
+        Node *temp = top;
+        top = top->next;
+        delete temp;
+    }
+}
+
 void push(char ch)
 {
     Node *newNode = new Node(ch);
@@ -82,7 +92,7 @@ void CheckForBalanceOfParantheses(string const &s, int len)
                 cout << "Parantheses are not Balance.\n";
                 return;
             }
-            if (peek() == '(' && s[i] == ')' || peek() == '{' && s[i] == '}' || peek() == '[' && s[i] == ']')
+            if ((peek() == '(' && s[i] == ')') || (peek() == '{' && s[i] == '}') || (peek() == '[' && s[i] == ']'))
             {
                 pop();
             }
@@ -100,14 +110,17 @@ void CheckForBalanceOfParantheses(string const &s, int len)
     else
     {
         cout << "Parantheses are not Balance.\n";
+        emptyTheStack();
     }
 }
 
 int main()
 {
-    string s = "[{()}";
-    string s2 = "()()";
+    string s = "[{()}]";
+    string s2 = "()()]";
     string s3 = "()[()]";
+    CheckForBalanceOfParantheses(s, s.length());
+    CheckForBalanceOfParantheses(s2, s2.length());
     CheckForBalanceOfParantheses(s3, s3.length());
 
     cout << endl;
