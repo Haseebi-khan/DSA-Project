@@ -82,8 +82,7 @@ void preorderTraversal(TreeNode *root)
     Stack st;
     st.push(root);
 
-    while
-    (!st.isEmpty())
+    while (!st.isEmpty())
     {
         TreeNode *current = st.pop();
         cout << current->val << " ";
