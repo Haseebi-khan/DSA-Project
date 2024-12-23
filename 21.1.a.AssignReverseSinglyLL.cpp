@@ -156,7 +156,7 @@ int main()
     list.insertAthead(34);
     list.insertAthead(2);
     list.insertAthead(78);
-    list.show();
+    // list.show();
     // insert at end
     list.insertAtEnd(4545);
     list.insertAtEnd(2);
@@ -165,16 +165,16 @@ int main()
     list.insertAtEnd(5);
     list.show();
 
-    cout << "Working well.\n";
-    cout << endl;
+    // cout << "Working well.\n";
+    // cout << endl;
 
-    cout << "Delete from End: ";
-    list.deleteFromEnd();
-    list.show();
+    // cout << "Delete from End: ";
+    // list.deleteFromEnd();
+    // list.show();
 
-    cout << "Delete from head: ";
-    list.deleteFromHead();
-    list.show();
+    // cout << "Delete from head: ";
+    // list.deleteFromHead();
+    // list.show();
 
     cout << "Reverse Iteration: ";
 

@@ -14,17 +14,22 @@
 // Explanation: 342 + 465 = 807.
 
 
+
 // Q5:
-
 // Department of Computer SciencePage 2
-
 // A biotonic doubly linked list is a doubly linked list which is first increasing and then decreasing. A
 // strictly increasing or a strictly decreasing list is also a biotonic doubly linked list. For example, the given
 // list is an example of biotonic doubly linked list.
-
 // 2<-> 5 <-> 7 <-> 12 <-> 10 <-> 6 <-> 4 <-> 1
 
+
+
 // Write down a code in C++ to sort the biotonic list. The algorithm must be as efficient as possible.
+// Department of Computer SciencePage 1
+// Q3: Merge two sorted lists
+// Linked List 1 : 23-> 45-> 65
+// Linked List 2 : 12->67->78
+// Merge Linked List: 12 -> 23 ->45 ->65 ->67 ->78
 
 
 // Q2: Remove Nth Node From End of List : Given a linked list, remove the n-th node from the end of list
@@ -33,17 +38,9 @@
 // Given linked list: 1->2->3->4->5, and n = 2.
 // After removing the second node from the end, the linked list becomes 1->2->3->5.
 
-
-
-// Q3: Merge two sorted lists
-// Linked List 1 : 23-> 45-> 65
-// Linked List 2 : 12->67->78
-// Department of Computer SciencePage 1
-
-
-// Merge Linked List: 12 -> 23 ->45 ->65 ->67 ->78
 // Q4: Given a linked list, swap every two adjacent nodes and return its head. Example:
 // Given 1->2->3->4, you should return the list as 2->1->4->3.
+
 // Q5: Given a linked list, rotate the list to the right by k places, where k is non-negative.
 // Example 1:
 // Input: 1->2->3->4->5->NULL, k = 2
@@ -51,6 +48,7 @@
 // Explanation:
 // rotate 1 steps to the right: 5->1->2->3->4->NULL
 // rotate 2 steps to the right: 4->5->1->2->3->NULL
+
 
 
 
@@ -81,8 +79,27 @@
 // Input: head = 1->4->3->2->5->2 and x = 3
 // Output: 1->2->2->4->3->5
 
+// ===============================================================================================================================================
 
-// Question 9:
+Not Solved
+// Q3: [2]❌
+// Three agents were working on a mission when they came across a secret message. They decided to deliver
+// this message to their boss but they can’t deliver the message as it is because it’s very sensitive information.
+// They decided to encrypt it and then send it to their boss. All of the three agents tried to encode it and came
+// up with the following Huffman codes:
+// Letter Frequency Agent 1 Agent 2 Agent 3
+// a 15 00 11 01
+// h 4 111 000 110
+// m 8 10 01 10
+// t 7 110 001 111
+// space 12 01 10 00
+// Choose one of the following options and Justify your answer:
+// i. All codes are wrong
+// ii. All codes are correct
+// iii. Only one of them is correct (mention that agent)
+
+
+// Question 9:❌
 // Write a recursive function to DLL class that returns true if the doubly link list is a palindrome. Think carefully about the input parameter of your function IsDLL.Palindrome
 // Analysis:
 // Doubly Linked List: A doubly linked list is a data structure where each node has pointers to both the next and previous nodes. This allows for efficient traversal in both directions.
@@ -95,31 +112,40 @@
 // If they are different, the list is not a palindrome. Return false.
 // Otherwise, recursively check the remaining sublist.
 
+// ❌Question 10 : Consider a function findTopPlayers which receives a list of N players with in a tournament and returns
+//   top 3 players based on their scores.
 
-// Question 10: 
-// Consider a function findTopPlayers which receives a list of N players with in a tournament and returns
-// top 3 players based on their scores.
-// void sort(Player** playersList, int N) {
-// int largest;
-// for (int j = 0; j < N - 1; j++) {
-// largest = j;
-// for (int i = j + 1; i < N; i++) {
-// if (playersList[i]->getScore() > playersList[largest]->getScore())
-// largest = i;
-// }
-// swap(playersList[j], playersList[largest]);
-// }
-// }
-// void findTopPlayers(Player** playersList, int N, Player** topPlayersList) {
-// sort(playersList, N);
-// for (int i = 0; i < 3; ++i) {
-// topPlayersList[i] = playersList[i];
-// }
-// }
-// (a) Do the time complexity analysis of the function findTopPlayers.
-// (b) Devise a better solution for this problem (and write its pseudocode) to improve the running time of this
-// algorithm. What will be the time complexity of your improved algorithm?
+// #include <iostream>
+// using namespace std;
 
+// void sort(Player **playersList, int N)
+// {
+//     int largest;
+//     for (int j = 0; j < N - 1; j++)
+//     {
+//         largest = j;
+//         for (int i = j + 1; i < N; i++)
+//         {
+//             if (playersList[i]->getScore() > playersList[largest]->getScore())
+//                 largest = i;
+//         }
+//         swap(playersList[j], playersList[largest]);
+//     }
+// }
+
+// void findTopPlayers(Player **playersList, int N, Player **topPlayersList)
+// {
+//     sort(playersList, N);
+//     for (int i = 0; i < 3; ++i)
+//     {
+//         topPlayersList[i] = playersList[i];
+//     }
+// }
+// // (a) Do the time complexity analysis of the function findTopPlayers.
+// // (b) Devise a better solution for this problem (and write its pseudocode) to improve the running time of this
+// // algorithm. What will be the time complexity of your improved algorithm?
+
+// ===============================================================================================================================================
 // Question 11: 
 // Given a string containing only lowercase letters and spaces, remove pairs of matching characters. This
 // matching starts from the end of the string. 
@@ -130,6 +156,7 @@
 // Output: “pcf oen“
 // Input: “an assassin sins”
 // Output: “an“
+
 
 // Question 12:
 
@@ -156,21 +183,6 @@
 // your algorithm. (Use your complete official name registered in FLEX at FAST-NU)
 
 
-// Q3: [2]
-// Three agents were working on a mission when they came across a secret message. They decided to deliver
-// this message to their boss but they can’t deliver the message as it is because it’s very sensitive information.
-// They decided to encrypt it and then send it to their boss. All of the three agents tried to encode it and came
-// up with the following Huffman codes:
-// Letter Frequency Agent 1 Agent 2 Agent 3
-// a 15 00 11 01
-// h 4 111 000 110
-// m 8 10 01 10
-// t 7 110 001 111
-// space 12 01 10 00
-// Choose one of the following options and Justify your answer:
-// i. All codes are wrong
-// ii. All codes are correct
-// iii. Only one of them is correct (mention that agent)
 
 // Question 1: 
 // We wish to add a method called searchAndPromote to our singly linked list class. Each node in the list contains:
@@ -212,6 +224,8 @@
 // Time Complexity
 // Analyze the time complexity of the function given there are n nodes in the list.
 // Answer: O(n)
+
+// ===============================================================================================================================================
 
 // Question 2: (Marks: 12+3)
 // Write a C++ implementation to determine whether an input string is in the following form:

@@ -1,3 +1,15 @@
+// Question 11: 
+// Given a string containing only lowercase letters and spaces, remove pairs of matching characters. This
+// matching starts from the end of the string. 
+// For example:
+// Input: “assassin”
+// Output: “in“
+// Input: “pacific ocean”
+// Output: “pcf oen“
+// Input: “an assassin sins”
+// Output: “an“
+
+
 // In computer science, a stack is an abstract data type that serves as a collection of elements, with two main operations:
 
 // Push, which adds an element to the collection, and
@@ -5,28 +17,7 @@
 // Stacks entered the computer science literature in 1946, when Alan M. Turing used the terms "bury" and "unbury" as a means of calling and returning from subroutines. Stack follows LIFO data structure type.
 
 // 1. Write a C++ program to implement a stack using an array with push and pop operations. Find the top element of the stack and check if the stack is empty or not.
-// Test Data:
-// Create a stack object:
-// Check the stack is empty or not? 1
-// Insert some elements onto the stack:
-// Stack elements: 4 5 6 7
-// Remove an element from the stack! 4
-// Stack elements: 5 6 7
-// Top of the element of the stack:
-// 5
-// Click me to see the sample solution
-
 // 2. Write a C++ program to implement a stack using an array with push and pop operations. Check if the stack is full.
-// Test Data:
-// MAX_SIZE of the array: 5
-// Insert some elements onto the stack:
-// Stack elements: 1 2 5 6 9
-// Is the stack full? 1
-// Remove an element from the stack! 1
-// Stack elements: 2 5 6 9
-// Is the stack full? 0
-// Click me to see the sample solution
-
 // 3. Write a C++ program to sort a given stack (using an array) using another stack.
 // Test Data:
 // Input some elements onto the stack:
@@ -41,8 +32,6 @@
 // Sort the elements in the stack:
 // Display the sorted elements of the stack:
 // Stack elements: -1 2 4 5 7 10
-// Click me to see the sample solution
-
 // 4. Write a C++ program that reverses the stack (using an array) elements.
 // Test Data:
 // Input some elements onto the stack:
@@ -150,17 +139,8 @@
 // Stack elements are: 5 7 2 4
 // Click me to see the sample solution
 
-// 13. Write a C++ program to delete all occurrences of an item in a stack using arrays.
-// Test Data:
-// Input some elements onto the stack:
-// Stack elements are: 5 2 2 4 7
-// Remove 2 from the said stack:
-// Stack elements are: 5 4 7
-// Input two more elements onto the stack:
-// Stack elements are: 5 7 5 4 7
-// Remove 7 from the said stack:
-// Stack elements are: 5 5 4
-// Click me to see the sample solution
+////==================================================================================================
+
 
 // 14. Write a C++ program to get the Kth element of a stack from top position.
 // Test Data:

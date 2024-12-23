@@ -1,160 +1,72 @@
 #include <iostream>
 using namespace std;
 
-class node
-{
-public:
-    int data;
-    node *next;
-    node(int value = 0) : data(value), next(nullptr) {}
+struct Node {
+    int info;
+    Node *link;
 };
 
-class singlyll
-{
-private:
-    node *head;
+int main() {
+    // Initialize the linked list
+    Node *first = nullptr;
 
-public:
-    singlyll() : head(nullptr) {}
-    void insertAthead(int value)
-    {
-        node *newNode = new node(value);
-        if (head == nullptr)
-        {
-            head = newNode;
-            return;
+    // Creating a sample linked list: 10 -> 20 -> 30 -> 40
+    first = new Node{10, nullptr};
+    first->link = new Node{20, nullptr};
+    first->link->link = new Node{30, nullptr};
+    first->link->link->link = new Node{40, nullptr};
+
+    // Variables for traversal and modification
+    Node *current = first, *trailCurrent = nullptr, *newNode = nullptr;
+    bool found = false;
+
+    // Search for the node with info == 30
+    while (current != nullptr && !found) {
+        if (current->info == 30) {
+            found = true;
+        } else {
+            trailCurrent = current;
+            current = current->link;
         }
-
-        newNode->next = head;
-        head = newNode;
     }
 
-    void insertAtEnd(int value)
-    {
-        node *newNode = new node(value);
-
-        if (head == nullptr)
-        {
-            head = newNode;
-            return;
+    // If found, delete the node
+    if (found) {
+        if (trailCurrent != nullptr) {
+            trailCurrent->link = current->link;
+        } else {
+            first = current->link; // Deleting the first node
         }
-        node *temp = head;
-
-        while (temp->next != nullptr)
-        {
-            temp = temp->next;
-        }
-        temp->next = newNode;
+        delete current;
     }
 
-    void deleteFromEnd()
-    {
-        if (head == nullptr)
-        {
-            cout << "Empty\n";
-            return;
-        }
-        if (head->next == nullptr)
-        {
-            delete head;
-            head = nullptr;
-            return;
-        }
-
-        node *temp = head;
-        node *current = nullptr;
-
-        while (temp->next != nullptr)
-        {
-            current = temp;
-            temp = temp->next;
-        }
-        current->next = nullptr;
-        delete temp;
-    }
-    void deleteFromEnd_()
-    {
-        if (head == nullptr) 
-        {
-            cout << "Empty\n";
-            return;
-        }
-        if (head->next == nullptr)
-        {
-            delete head;
-            head = nullptr;
-            return;
-        }
-
-        node *temp = head;
-
-        while (temp->next->next != nullptr)
-        {
-            temp = temp->next;
-        }
-
-        delete temp->next;    
-        temp->next = nullptr; 
+    // Insert a new node with info == 50 after `trailCurrent`
+    if (trailCurrent != nullptr) {
+        newNode = new Node{50, trailCurrent->link};
+        trailCurrent->link = newNode;
+    } else {
+        // Special case: list was empty or first node was deleted
+        newNode = new Node{50, first};
+        first = newNode;
     }
 
-    void show()
-    {
-        if (head == nullptr)
-        {
-            cout << "List is empty.\n";
-            return;
-        }
-        node *temp = head;
-        while (temp != nullptr)
-        {
-            cout << temp->data << " ";
-            temp = temp->next;
-        }
-        cout << endl;
+    // Print the list
+    cout << "Current linked list: ";
+    current = first;
+    while (current != nullptr) {
+        cout << current->info << " ";
+        current = current->link;
     }
-    void deleteFromHead()
-    {
-        if (head == nullptr)
-        {
-            cout << "List is empty.\n";
-            return;
-        }
-        
-        node *temp = head;
-        head = head->next;
-        delete temp;
-
-        
-    }
-};
-
-int main()
-{
-    singlyll list;
-    // inseert at begging
-    list.insertAthead(444);
-    list.insertAthead(34);
-    list.insertAthead(2);
-    list.insertAthead(78);
-    list.show();
-    // insert at end
-    list.insertAtEnd(4545);
-    list.insertAtEnd(2);
-    list.insertAtEnd(3);
-    list.insertAtEnd(4);
-    list.insertAtEnd(5);
-    list.show();
-
-    cout << "Working well.\n";
-
-    // Delete from end;
-    list.deleteFromEnd();
-    list.show();
-
-    // Delete from head;
-    list.deleteFromHead();
-    list.show();
-
     cout << endl;
+
+    // Delete all nodes to free memory
+    current = first;
+    while (current != nullptr) {
+        Node *temp = current;
+        current = current->link;
+        delete temp;
+    }
+    first = nullptr; // Avoid dangling pointer
+
     return 0;
 }

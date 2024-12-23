@@ -60,9 +60,10 @@ public:
             Node *temp = head;
             while (temp != nullptr)
             {
-                cout << temp->data << "->";
+                cout << temp->data << " -> ";
                 temp = temp->next;
             }
+            cout<<"NULL";
             cout << endl;
         }
     }
@@ -249,7 +250,7 @@ int main()
     s.insertAtEnd(9);
     s.insertAtEnd(10);
     s.show();
-    // s.SwappingPority(3, 2);
+    s.SwappingPority(3, 2);
     s.show();
 
     cout << endl;
