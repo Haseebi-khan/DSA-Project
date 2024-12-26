@@ -96,7 +96,7 @@ int main()
     list.addOnRear(5);
     list.addOnRear(6);
     list.show();
-    list.RotationOfLL(2);
+    list.RotationOfLL(3);
     list.show();
 
 

@@ -42,7 +42,6 @@ string preToPost(string pre_exp)
 			// Push string temp back to stack
 			s.push(temp);
 		}
-
 		// if symbol is an operand
 		else {
 

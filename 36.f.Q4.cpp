@@ -38,7 +38,8 @@ public:
     }
 
     // Q4: Given a linked list, swap every two adjacent nodes and return its head. Example:
-    // Given 1->2->3->4, you should return the list as 2->1->4->3.
+    // Given ( dummy 0-> ) 1-> 2-> 3-> 4, you should return the list as 2->1->4->3.
+                //   p     c   n   
 
     void swapAdjacentNodes()
     {
@@ -47,7 +48,7 @@ public:
         Node *prev = dummy;
         Node *cur = head;
 
-        while (cur != nullptr && cur->next != nullptr)
+        while (cur && cur->next)
         {
             Node *next = cur->next;
             cur->next = next->next;
@@ -55,17 +56,16 @@ public:
             prev->next = next;
 
             prev = cur;
-            cur=cur->next;
+            cur = cur->next;
         }
-        
-        head=dummy->next;
-        delete dummy;
 
+        head = dummy->next;
+        delete dummy;
     }
 
     void show()
     {
-    
+
         Node *temp = head;
         cout << "list: ";
         while (temp)

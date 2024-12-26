@@ -16,11 +16,12 @@
 #include <iostream>
 #include <stack>
 using namespace std;
-stack <int> st;
+
+stack<int> st;
 
 void sorting()
 {
-    stack <int> temp;
+    stack<int> temp;
 
     while (!st.empty())
     {
@@ -52,19 +53,24 @@ void show()
         }
         cout << "\n";
     }
-    
 }
 
-int main() 
+int main()
 {
-    
+
     st.push(5);
     st.push(4);
     st.push(2);
     st.push(6);
     st.push(7);
     st.push(1);
-
+    show();
+    st.push(5);
+    st.push(4);
+    st.push(2);
+    st.push(6);
+    st.push(7);
+    st.push(1);
     sorting();
     show();
     cout << endl;

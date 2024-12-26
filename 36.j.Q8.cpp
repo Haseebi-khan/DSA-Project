@@ -15,9 +15,9 @@ using namespace std;
 
 int main()
 {
-        stack<char> st2;
+    stack<char> st2;
     stack<char> st;
-    string str = "assassin";
+    string str = "an assassin sins";
     string newstr = "";
     for (int i = 0; i < str.length(); i++)
     {
@@ -33,19 +33,18 @@ int main()
         {
             st.push(str[i]);
         }
-
     }
-        while (!st.empty())
-        {
+    while (!st.empty())
+    {
 
-            st2.push(st.top());
-            st.pop();
-        }
-        while (!st2.empty())
-        {
-            newstr += st2.top();
-            st2.pop();
-        }
+        st2.push(st.top());
+        st.pop();
+    }
+    while (!st2.empty())
+    {
+        newstr += st2.top();
+        st2.pop();
+    }
 
     cout << "string: " << newstr << endl;
 

@@ -63,7 +63,7 @@ public:
                 cout << temp->data << " -> ";
                 temp = temp->next;
             }
-            cout<<"NULL";
+            cout << "NULL";
             cout << endl;
         }
     }
@@ -142,7 +142,6 @@ public:
         }
     }
 
-
     // void SwappingPority_(int Mcount, int NCount)
     // {
     //     Node *newhead = head;
@@ -201,7 +200,7 @@ public:
             // Step 2: Identify the next N elements
             Node *N_start = M_end->next;
             Node *N_end = N_start;
-            
+
             for (int i = 1; i < NCount && N_end != nullptr; i++)
             {
                 N_end = N_end->next;
@@ -213,16 +212,20 @@ public:
             }
 
             // Step 3: Save the pointer to the next segment
-            Node *nextSegment = N_end != nullptr ? N_end->next : nullptr;
+            Node *nextSegment = nullptr;
+            if (N_end != nullptr)
+            {
+                nextSegment = N_end->next;
+            }
 
             // Step 4: Swap the M and N segments
-            if (prev != nullptr)
+            if (prev == nullptr)
             {
-                prev->next = N_start; // Link the previous part of the list to the N group
+                head = N_start; // Update the head of the list if swapping the first group
             }
             else
             {
-                head = N_start; // Update the head of the list if swapping the first group
+                prev->next = N_start; // Link the previous part of the list to the N group
             }
             N_end->next = M_start;     // Link the end of N group to the start of M group
             M_end->next = nextSegment; // Link the end of M group to the next segment

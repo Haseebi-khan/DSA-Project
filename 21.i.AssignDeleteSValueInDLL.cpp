@@ -35,22 +35,43 @@ public:
     {
         if (head == nullptr)
         {
-            cout << "Linkedlist is empty." << endl;
+            cout << "List is empty.\n";
             return;
         }
 
-        node *current = head;
-        while (current != nullptr)
+        node *cur = head;
+
+        while (cur != nullptr)
         {
-            if (current->data == value)
+            if (cur->data == value)
             {
-                node *temp = current;
-                current = current->pre;
-                current->next = temp->next;
+                node *temp = cur;
+
+                if (cur == head)
+                {
+                    head = head->next;
+                    if (head != nullptr)
+                    {
+                        head->pre = nullptr;
+                    }
+                }
+                else
+                {
+                    cur->pre->next = cur->next;
+                }
+
+                if (cur->next != nullptr)
+                {
+                    cur->next->pre = cur->pre;
+                }
+
+                cur = cur->next;
                 delete temp;
             }
-
-            current = current->next;
+            else
+            {
+                cur = cur->next;
+            }
         }
     }
     // Function to insert node at the end
