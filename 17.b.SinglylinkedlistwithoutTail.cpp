@@ -103,20 +103,6 @@ public:
             temp->next = nullptr;
         }
     }
-    void check()
-    {
-        cout << "0000000000000000000000000000000000000000000" << endl;
-        Node *temp = head;
-        cout << "Address check: ";
-        cout << temp->next->next << endl;
-        cout << "0000000000000000000000000000000000000000000" << endl;
-        while (temp != nullptr)
-        {
-            cout << temp << " ";
-            temp = temp->next;
-        }
-        cout << endl;
-    }
 
     void deletePosition(int index)
     {
