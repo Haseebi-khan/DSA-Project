@@ -41,7 +41,6 @@ int peek()
     return Stacktop->data;
 }
 
-
 void reverseArray(int arr[], int n)
 {
     for (int i = 0; i < n; i++)
@@ -66,7 +65,7 @@ int main()
     {
         cout << arr[i] << " ";
     }
-    
+
     reverseArray(arr, n);
 
     cout << "\nUpdated Array: ";
@@ -75,7 +74,6 @@ int main()
         cout << arr[i] << " ";
     }
 
-
-    cout <<endl;
+    cout << endl;
     return 0;
 }
