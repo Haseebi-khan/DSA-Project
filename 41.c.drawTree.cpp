@@ -2,6 +2,14 @@
 #include <stack>
 using namespace std;
 
+// 1. Binary Search Trees(BSTs)
+// (a) Draw the BST where the data value at each node is an integer and the values are entered in the following order: 36, 22, 10, 44, 42
+// (b) Draw the BST after the following insertions have been done in the tree of part (a): 16, 25, 3, 23, 24 (there is no attempt at being tricky; parts (a) and (b) could be combined into a single one but we want you to check your work so that you don't make a silly mistake)
+// (c) Now draw the tree after deletions of 42, 23 and 22 in this order
+// (d) Write down the order on which the node values are reached when the BST of part
+// (c) is traversed (I) in in order (ii) in post order (iii) in preorder
+// (e) What is the height of the tree of part
+
 class Node
 {
 public:
@@ -190,34 +198,77 @@ void ShowLevelOrder(Node *root)
         Node *cur = q.peek();
         q.dequeue();
 
-        cout << cur->data;
-        cout << endl;
+        cout << cur->data << " ";
 
         if (cur->left)
         {
             q.enqueue(cur->left);
         }
 
-        cout << "";
-
         if (cur->right)
         {
             q.enqueue(cur->right);
         }
     }
+    cout << endl;
+}
+
+void DeleteAllTree(Node *&root)
+{
+    if (root == nullptr)
+    {
+        return;
+    }
+    Queue q;
+    q.enqueue(root);
+    while (!q.empty())
+    {
+        Node *cur = q.peek();
+        q.dequeue();
+
+        if (cur->left)
+        {
+            q.enqueue(cur->left);
+        }
+        if (cur->right)
+        {
+            q.enqueue(cur->right);
+        }
+
+        delete cur;
+    }
+    root = nullptr;
+}
+
+Node *Successer(Node *node)
+{
+    Node *curr = node;
+
+    
+    while (curr->left != nullptr)
+    {
+        curr = curr->left;
+    }
+    
+    return curr;
 }
 
 int main()
 {
-    Node *root1 = nullptr;
-    // 36, 22, 10, 44, 42
-    insertNode(root1, 36);
-    insertNode(root1, 22);
-    insertNode(root1, 10);
-    insertNode(root1, 44);
-    insertNode(root1, 42);
 
-    ShowLevelOrder(root1);
+    Node *root = nullptr;
+    // 36, 22, 10, 44, 42
+    insertNode(root, 36);
+    insertNode(root, 22);
+    insertNode(root, 10);
+    insertNode(root, 44);
+    insertNode(root, 42);
+
+    ShowLevelOrder(root);
+
+    DeleteAllTree(root);
+
+    ShowLevelOrder(root);
 
     cout << "\n";
     return 0;

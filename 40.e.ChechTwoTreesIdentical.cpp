@@ -17,6 +17,7 @@ struct QueueNode
     QueueNode *next;
     QueueNode(Node *node) : data(node), next(nullptr) {}
 };
+
 class Queue
 {
     QueueNode *front;
@@ -37,15 +38,15 @@ public:
             rear = newNode;
         }
     }
-    int dequeue()
+    Node *dequeue()
     {
         if (front == nullptr)
         {
             cout << "Queue is empty.\n";
-            return -1;
+            return nullptr;
         }
         QueueNode *temp = front;
-        int value = front->data->data;
+        Node *value = front->data;
         front = front->next;
         delete temp;
 
@@ -66,14 +67,7 @@ public:
     }
     bool empty()
     {
-        if (front == nullptr)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return front == nullptr;
     }
 };
 
@@ -142,46 +136,42 @@ bool checkIdenticalTree(Node *root1, Node *root2)
         return false;
     }
 
-    Queue part1;
-    Queue tempq;
-    Node *temp = root1;
-    tempq.enqueue(root1);
+    Queue q1, q2;
+    q1.enqueue(root1);
+    q2.enqueue(root2);
 
-    while (!tempq.empty())
+    while (!q1.empty() && !q2.empty())
     {
-        Node *curr = tempq.peek();
-        part1.enqueue(curr);
+        Node *node1 = q1.dequeue();
+        Node *node2 = q2.dequeue();
 
-        if (curr->left)
+        if (node1->data != node2->data)
         {
-            tempq.enqueue(curr->left); 
+            return false;
         }
-        if (curr->right)
+
+        if (node1->left && node2->left)
         {
-            tempq.enqueue(curr->right);
+            q1.enqueue(node1->left);
+            q2.enqueue(node2->left);
+        }
+        else if (node1->left || node2->left)
+        {
+            return false;
+        }
+
+        if (node1->right && node2->right)
+        {
+            q1.enqueue(node1->right);
+            q2.enqueue(node2->right);
+        }
+        else if (node1->right || node2->right)
+        {
+            return false;
         }
     }
 
-    Queue part2;
-    Node *temp = root1;
-    tempq.enqueue(root1);
-
-    while (!tempq.empty())
-    {
-        Node *curr = tempq.peek();
-        part1.enqueue(curr);
-
-        if (curr->left)
-        {
-            tempq.enqueue(curr->left); 
-        }
-        if (curr->right)
-        {
-            tempq.enqueue(curr->right);
-        }
-    }
-
-
+    return q1.empty() && q2.empty();
 }
 
 int main()
@@ -209,9 +199,17 @@ int main()
     printorder(root1);
     cout << endl;
     cout << "Second Tree: ";
-    printorder(root1);
+    printorder(root2);
     cout << endl;
 
-    cout << endl;
+    if (checkIdenticalTree(root1, root2))
+    {
+        cout << "The trees are identical.\n";
+    }
+    else
+    {
+        cout << "The trees are not identical.\n";
+    }
+
     return 0;
 }

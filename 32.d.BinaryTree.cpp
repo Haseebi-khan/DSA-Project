@@ -73,33 +73,31 @@ public:
     }
 };
 
-// Preorder Traversal
+// Preorder Traversal D + L + R
 void preorderTraversal(TreeNode *root)
 {
     if (!root)
         return;
 
-    Stack st;
-    st.push(root);
+    Stack s;
 
-    while (!st.isEmpty())
+    s.push(root);
+    while (!s.isEmpty())
     {
-        TreeNode *current = st.pop();
-        cout << current->val << " ";
-
-        // Push right first so left is processed next
-        if (current->right)
+        TreeNode *cur = s.pop();
+        cout << cur->val << " ";
+        if (cur->right)
         {
-            st.push(current->right);
+            s.push(cur->right);
         }
-        if (current->left)
+        if (cur->left)
         {
-            st.push(current->left);
+            s.push(cur->left);
         }
     }
 }
 
-// Inorder Traversal
+// Inorder Traversal L + D + R
 void inorderTraversal(TreeNode *root)
 {
     Stack st;

@@ -8,7 +8,6 @@ public:
     int data;
     Node *left;
     Node *right;
-    int height = 0;
     Node(int data = 0) : data(data), left(nullptr), right(nullptr) {}
 };
 
@@ -72,65 +71,6 @@ public:
     }
 };
 
-struct NodeS
-{
-    Node *data;
-    NodeS *next;
-    NodeS(Node *d) : data(d), next(nullptr) {}
-};
-
-class Stack
-{
-private:
-    NodeS *top;
-
-public:
-    Stack() : top(nullptr) {}
-
-    void push(Node *value)
-    {
-        NodeS *newNode = new NodeS(value);
-        if (top == nullptr)
-        {
-            top = newNode;
-        }
-        else
-        {
-            newNode->next = top;
-            top = newNode;
-        }
-    }
-    void pop()
-    {
-        if (top == nullptr)
-        {
-            cout << "Stack is UnderFlow.\n";
-            return;
-        }
-        else
-        {
-            NodeS *temp = top;
-            top = top->next;
-            delete temp;
-        }
-    }
-    Node *peek()
-    {
-        if (top == nullptr)
-        {
-            return nullptr;
-        }
-        else
-        {
-            return top->data;
-        }
-    }
-    bool isEmpty()
-    {
-        return top == nullptr;
-    }
-};
-
 void insertNode(Node *&root, int value)
 {
     Node *newNode = new Node(value);
@@ -175,31 +115,27 @@ void insertNode(Node *&root, int value)
     }
 }
 
-void ShowLevelOrder(Node *root)
+// Q2: Print Level Order Traversal of a binary tree.
+void LevelOrderTraversal(Node *root)
 {
-    cout << "List: ";
     if (root == nullptr)
     {
+        cout << "Tress is Empty.\n";
         return;
     }
+    cout << "Level Order: ";
     Queue q;
     q.enqueue(root);
-
     while (!q.empty())
     {
         Node *cur = q.peek();
         q.dequeue();
-
-        cout << cur->data;
-        cout << endl;
+        cout << cur->data << " ";
 
         if (cur->left)
         {
             q.enqueue(cur->left);
         }
-
-        cout << "";
-
         if (cur->right)
         {
             q.enqueue(cur->right);
@@ -210,15 +146,17 @@ void ShowLevelOrder(Node *root)
 int main()
 {
     Node *root1 = nullptr;
-    // 36, 22, 10, 44, 42
-    insertNode(root1, 36);
-    insertNode(root1, 22);
-    insertNode(root1, 10);
-    insertNode(root1, 44);
-    insertNode(root1, 42);
 
-    ShowLevelOrder(root1);
+    insertNode(root1, 15);
+    insertNode(root1, 10);
+    insertNode(root1, 20);
+    insertNode(root1, 8);
+    insertNode(root1, 12);
+    insertNode(root1, 16);
+    insertNode(root1, 25);
+    LevelOrderTraversal(root1);
 
     cout << "\n";
+
     return 0;
 }
