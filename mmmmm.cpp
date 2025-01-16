@@ -15,6 +15,67 @@ struct TreeNode
             children[i] = nullptr;
     }
 };
+struct NodeQ
+{
+    string data;
+    NodeQ *next;
+    NodeQ(string data) : data(data), next(nullptr) {}
+};
+
+class MyQueue
+{
+public:
+    NodeQ *front = nullptr;
+    NodeQ *rear = nullptr;
+
+    void push(const string &value)
+    {
+        NodeQ *newNode = new NodeQ(value);
+        if (rear == nullptr)
+        {
+            front = rear = newNode;
+        }
+        else
+        {
+            rear->next = newNode;
+            rear = newNode;
+        }
+    }
+
+    string pop()
+    {
+        if (front == nullptr)
+        {
+            throw runtime_error("Queue is empty");
+        }
+        string value = front->data;
+        NodeQ *temp = front;
+        front = front->next;
+        delete temp;
+        if (front == nullptr)
+        {
+            rear = nullptr;
+        }
+        return value;
+    }
+
+    bool empty() const
+    {
+        return front == nullptr;
+    }
+
+    int size() const
+    {
+        int count = 0;
+        NodeQ *current = front;
+        while (current)
+        {
+            count++;
+            current = current->next;
+        }
+        return count;
+    }
+};
 
 // Structure to hold course details
 struct Course
@@ -22,68 +83,8 @@ struct Course
     string name;
     int capacity = 50;
     int enrolled = 0;
-    class MyQueue
-    {
-    public:
-        struct Node
-        {
-            string data;
-            Node *next;
-            Node(string data) : data(data), next(nullptr) {}
-        };
-        Node *front = nullptr;
-        Node *rear = nullptr;
-
-        void push(const string &value)
-        {
-            Node *newNode = new Node(value);
-            if (rear == nullptr)
-            {
-                front = rear = newNode;
-            }
-            else
-            {
-                rear->next = newNode;
-                rear = newNode;
-            }
-        }
-
-        string pop()
-        {
-            if (front == nullptr)
-            {
-                throw runtime_error("Queue is empty");
-            }
-            string value = front->data;
-            Node *temp = front;
-            front = front->next;
-            delete temp;
-            if (front == nullptr)
-            {
-                rear = nullptr;
-            }
-            return value;
-        }
-
-        bool empty() const
-        {
-            return front == nullptr;
-        }
-
-        size_t size() const
-        {
-            size_t count = 0;
-            Node *current = front;
-            while (current)
-            {
-                count++;
-                current = current->next;
-            }
-            return count;
-        }
-    } waitlist;
+    MyQueue waitlist;
 };
-
 
 // Linked list for student records
 struct StudentNode
@@ -94,60 +95,67 @@ struct StudentNode
     StudentNode(string courseName) : courseName(courseName), next(nullptr) {}
 };
 
+struct StudentRecord
+{
+    string name;
+    StudentNode *head;
+};
+
+struct NodeS
+{
+    pair<string, string> data;
+    NodeS *next;
+    NodeS(pair<string, string> data) : data(data), next(nullptr) {}
+};
+
+// Stack class
+class MyStack
+{
+public:
+    NodeS *top = nullptr;
+
+    void push(const pair<string, string> &action)
+    {
+        NodeS *newNode = new NodeS(action);
+        newNode->next = top;
+        top = newNode;
+    }
+
+    pair<string, string> pop()
+    {
+        if (top == nullptr)
+        {
+            throw runtime_error("Stack is empty");
+        }
+        pair<string, string> value = top->data;
+        NodeS *temp = top;
+        top = top->next;
+        delete temp;
+        return value;
+    }
+
+    bool empty() const
+    {
+        return top == nullptr;
+    }
+};
+// ActionHistory structure
+struct ActionHistory
+{
+    string name;
+    MyStack actions; // Stack for storing action history
+};
+
 // Class to manage the University Course Registration System
 class UniversityCourseRegistration
 {
 private:
     TreeNode *root;
-    Course courses[100]; // Array for storing courses
-    int courseCount;
-    struct StudentRecord
-    {
-        string name;
-        StudentNode *head;
-    } students[100]; // Array for student records
+    Course courses[100];          // Array for storing courses
+    StudentRecord students[100];  // Array for student records
+    ActionHistory histories[100]; // Array for action histories
     int studentCount;
-    struct ActionHistory
-    {
-        string name;
-        class MyStack
-        {
-        public:
-            struct Node
-            {
-                pair<string, string> data;
-                Node *next;
-                Node(pair<string, string> data) : data(data), next(nullptr) {}
-            };
-            Node *top = nullptr;
-
-            void push(const pair<string, string> &action)
-            {
-                Node *newNode = new Node(action);
-                newNode->next = top;
-                top = newNode;
-            }
-
-            pair<string, string> pop()
-            {
-                if (top == nullptr)
-                {
-                    throw runtime_error("Stack is empty");
-                }
-                pair<string, string> value = top->data;
-                Node *temp = top;
-                top = top->next;
-                delete temp;
-                return value;
-            }
-
-            bool empty() const
-            {
-                return top == nullptr;
-            }
-        } actions;
-    } histories[100]; // Array for action histories
-
+    int courseCount;
     int historyCount;
 
     int findStudent(string name)
@@ -175,12 +183,11 @@ private:
         int index = findActionHistory(studentName);
         if (index == -1)
         {
-            // Correct initialization here
+            // Initialize a new history entry for the student
             histories[historyCount].name = studentName;
-            histories[historyCount].actions = ActionHistory::MyStack(); // Fix this line
             index = historyCount++;
         }
-        histories[index].actions.push(action);
+        histories[index].actions.push(action); // Push the action to the student's action stack
     }
 
     void displayStudentRecords(string studentName)
@@ -202,89 +209,6 @@ private:
     }
 
 public:
-    void displayMenu()
-    {
-        char choice;
-        do
-        {
-            cout << "\n=== University Course Registration System ===\n";
-            cout << "1. Add Department\n";
-            cout << "2. Add Course\n";
-            cout << "3. Search Course\n";
-            cout << "4. Register for Course\n";
-            cout << "5. Drop Course\n";
-            cout << "6. Undo Last Action\n";
-            cout << "7. Display Student Records\n";
-            cout << "z. Exit\n";
-            cout << "Enter your choice: ";
-            cin >> choice;
-
-            if (choice == '1')
-            {
-                string department;
-                cout << "Enter department name: ";
-                cin >> department;
-                addDepartment(department);
-            }
-            else if (choice == '2')
-            {
-                string department, course;
-                cout << "Enter department name: ";
-                cin >> department;
-                cout << "Enter course name: ";
-                cin >> course;
-                addCourse(department, course);
-            }
-            else if (choice == '3')
-            {
-                string course;
-                cout << "Enter course name: ";
-                cin >> course;
-                searchCourse(course);
-            }
-            else if (choice == '4')
-            {
-                string student, course;
-                cout << "Enter student name: ";
-                cin >> student;
-                cout << "Enter course name: ";
-                cin >> course;
-                registerCourse(student, course);
-            }
-            else if (choice == '5')
-            {
-                string student, course;
-                cout << "Enter student name: ";
-                cin >> student;
-                cout << "Enter course name: ";
-                cin >> course;
-                dropCourse(student, course);
-            }
-            else if (choice == '6')
-            {
-                string student;
-                cout << "Enter student name: ";
-                cin >> student;
-                undo(student);
-            }
-            else if (choice == '7')
-            {
-                string student;
-                cout << "Enter student name: ";
-                cin >> student;
-                displayStudentRecords(student);
-            }
-            else if (choice != '8')
-            {
-                cout << "Invalid choice! Please try again.\n";
-            }
-
-            cin.ignore();
-        } while (choice != '8');
-
-        cout << "Thanks For using Goodbye!\n";
-    }
-
     UniversityCourseRegistration()
     {
         root = new TreeNode("University");
@@ -483,6 +407,89 @@ public:
             current = current->next;
         }
         return false;
+    }
+
+    void displayMenu()
+    {
+        char choice;
+        do
+        {
+            cout << "\n=== University Course Registration System ===\n";
+            cout << "1. Add Department\n";
+            cout << "2. Add Course\n";
+            cout << "3. Search Course\n";
+            cout << "4. Register for Course\n";
+            cout << "5. Drop Course\n";
+            cout << "6. Undo Last Action\n";
+            cout << "7. Display Student Records\n";
+            cout << "z. Exit\n";
+            cout << "Enter your choice: ";
+            cin >> choice;
+
+            if (choice == '1')
+            {
+                string department;
+                cout << "Enter department name: ";
+                cin >> department;
+                addDepartment(department);
+            }
+            else if (choice == '2')
+            {
+                string department, course;
+                cout << "Enter department name: ";
+                cin >> department;
+                cout << "Enter course name: ";
+                cin >> course;
+                addCourse(department, course);
+            }
+            else if (choice == '3')
+            {
+                string course;
+                cout << "Enter course name: ";
+                cin >> course;
+                searchCourse(course);
+            }
+            else if (choice == '4')
+            {
+                string student, course;
+                cout << "Enter student name: ";
+                cin >> student;
+                cout << "Enter course name: ";
+                cin >> course;
+                registerCourse(student, course);
+            }
+            else if (choice == '5')
+            {
+                string student, course;
+                cout << "Enter student name: ";
+                cin >> student;
+                cout << "Enter course name: ";
+                cin >> course;
+                dropCourse(student, course);
+            }
+            else if (choice == '6')
+            {
+                string student;
+                cout << "Enter student name: ";
+                cin >> student;
+                undo(student);
+            }
+            else if (choice == '7')
+            {
+                string student;
+                cout << "Enter student name: ";
+                cin >> student;
+                displayStudentRecords(student);
+            }
+            else if (choice != '8')
+            {
+                cout << "Invalid choice! Please try again.\n";
+            }
+
+            cin.ignore();
+        } while (choice != '8');
+
+        cout << "Thanks For using Goodbye!\n";
     }
 };
 

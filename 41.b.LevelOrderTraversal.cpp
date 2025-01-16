@@ -115,7 +115,6 @@ void insertNode(Node *&root, int value)
     }
 }
 
-// Q2: Print Level Order Traversal of a binary tree.
 void LevelOrderTraversal(Node *root)
 {
     if (root == nullptr)
