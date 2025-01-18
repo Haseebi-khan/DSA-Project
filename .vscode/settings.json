@@ -4,6 +4,7 @@
         "new": "cpp",
         "iostream": "cpp",
         "random": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "string": "cpp"
     }
 }
