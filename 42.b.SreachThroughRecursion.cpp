@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include <cmath>
 using namespace std;
 
 class Node
@@ -78,14 +77,20 @@ int height(Node *root)
     }
 }
 
-int countNodes(Node *root)
+Node *SearchValueUsingRecursion(Node *root, int value)
 {
-    if (!root)
+    if (root == nullptr || root->data == value)
     {
-        return 0;
+        return root;
     }
-
-    return 1 + countNodes(root->left) + countNodes(root->right);
+    else if (value < root->data)
+    {
+        return SearchValueUsingRecursion(root->left, value);
+    }
+    else
+    {
+        return SearchValueUsingRecursion(root->right, value);
+    }
 }
 
 int main()
@@ -99,13 +104,22 @@ int main()
     insert(14);
     insert(13);
     insert(12);
-    cout << "Height of the Tree is: " << height(root) << endl;
-    int Treeheight = height(root);
 
-    int size = countNodes(root);
-    int totalNodes = pow(2, Treeheight + 1) - 1;
-
-    cout << "Number of Nodes for Height " << Treeheight << " is: " << totalNodes << endl;
+    // cout << " Height of the Tree is: " << height(root) << endl;
+    
+    int value;
+    cout << "Enter the Value to find: ";
+    cin >> value;
+    Node *temp = SearchValueUsingRecursion(root, value);
+    if (temp)
+    {
+        cout << "Value is: " << temp->data;
+        delete temp;
+    }
+    else
+    {
+        cout << "Value is not Found.\n";
+    }
 
     cout << "\n";
     return 0;

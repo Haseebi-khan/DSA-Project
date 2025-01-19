@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include <cmath>
 using namespace std;
 
 class Node
@@ -58,54 +57,72 @@ void insert(int value)
     }
 }
 
-int height(Node *root)
+void DeletionOfNodes(int value)
 {
     if (!root)
     {
-        return -1;
+        return;
     }
 
-    int leftHeight = height(root->left);
-    int rightHeight = height(root->right);
-
-    if (leftHeight > rightHeight)
+    Node *temp = root;
+    bool found = false;
+    while (temp)
     {
-        return 1 + leftHeight;
+        if (value == temp->data)
+        {
+            if (!temp->left  && !temp->right )
+            {
+                delete temp;
+                temp = nullptr;
+                return;
+            }
+            
+        }
+        else if (value < temp->data)
+        {
+            temp = temp->left;
+        }
+        else
+        {
+            temp = temp->right;
+        }
     }
-    else
+    if (!found)
     {
-        return 1 + rightHeight;
+        cout << "Value is not Found.\n";
     }
 }
 
-int countNodes(Node *root)
+void preshow(Node *root)
 {
     if (!root)
     {
-        return 0;
+        return;
     }
-
-    return 1 + countNodes(root->left) + countNodes(root->right);
+    cout << root->data << " ";
+    preshow(root->left);
+    preshow(root->right);
 }
 
 int main()
 {
+    insert(30);
+    insert(18);
+    insert(45);
     insert(10);
-    insert(5);
-    insert(15);
-    insert(6);
-    insert(8);
-    insert(9);
-    insert(14);
-    insert(13);
-    insert(12);
-    cout << "Height of the Tree is: " << height(root) << endl;
-    int Treeheight = height(root);
+    insert(42);
+    insert(57);
+    cout << "List: ";
+    preshow(root);
+    cout << "\n";
 
-    int size = countNodes(root);
-    int totalNodes = pow(2, Treeheight + 1) - 1;
 
-    cout << "Number of Nodes for Height " << Treeheight << " is: " << totalNodes << endl;
+
+    DeletionOfNodes(10);
+
+    cout << "List: ";
+    preshow(root);
+    cout << "\n";
 
     cout << "\n";
     return 0;

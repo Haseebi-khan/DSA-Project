@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include <cmath>
 using namespace std;
 
 class Node
@@ -78,16 +77,6 @@ int height(Node *root)
     }
 }
 
-int countNodes(Node *root)
-{
-    if (!root)
-    {
-        return 0;
-    }
-
-    return 1 + countNodes(root->left) + countNodes(root->right);
-}
-
 int main()
 {
     insert(10);
@@ -99,14 +88,11 @@ int main()
     insert(14);
     insert(13);
     insert(12);
-    cout << "Height of the Tree is: " << height(root) << endl;
-    int Treeheight = height(root);
-
-    int size = countNodes(root);
-    int totalNodes = pow(2, Treeheight + 1) - 1;
-
-    cout << "Number of Nodes for Height " << Treeheight << " is: " << totalNodes << endl;
+    cout << " Height of the Tree is: " << height(root) << endl;
 
     cout << "\n";
     return 0;
 }
+
+
+
