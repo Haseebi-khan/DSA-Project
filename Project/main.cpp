@@ -5,7 +5,12 @@
 #include <stdio.h>
 #include <string>
 
+// #include <thread> // For sleep_for and chrono
+// #include <chrono> // For duration
+
 using namespace std;
+
+char Trace = '\0';
 
 char getch()
 {
@@ -84,14 +89,12 @@ void showCursor(bool showFlag)
     }
 }
 
-// Stack
-
 class Player
 {
 public:
     string Name;
-    double Score = 5000;
-    Player(string n = "UnKnown") : Name(n) {}
+    double Score;
+    Player(string n = "UnKnown") : Name(n), Score(5000) {}
 };
 
 class Node
@@ -175,6 +178,7 @@ class doublyLinkedList
 {
 protected:
     Node *head, *tail;
+    Player player;
 
     Stack s1, s2;
 
@@ -193,22 +197,21 @@ protected:
         }
     }
 
-    void undo()
+    bool checkSequence()
     {
-        if (!s1.isEmpty())
-        {
-            s2.push(s1.peek());
-            s1.pop();
-        }
-    }
+        string target = "12345678"; // The target sequence to match
+        Node *current = head;
 
-    void redo()
-    {
-        if (!s2.isEmpty())
+        for (char ch : target)
         {
-            s1.push(s2.peek());
-            s2.pop();
+            if (current == nullptr || current->data != ch)
+            {
+                return false; // Mismatch found or list ends prematurely
+            }
+            current = current->next;
         }
+
+        return current != nullptr && current->data == ' '; // Ensure there's a space at the end
     }
 
 public:
@@ -222,8 +225,13 @@ public:
     // }
     void Box()
     {
+
         showCursor(true);
         // left line
+        gotoXY(3, 3);
+        textColor(1, true);
+        cout << "Score: " << player.Score;
+
         for (int i = 4; i < 16; i++)
         {
             textColor(2); // Set text color to Blue (colorIndex 4)
@@ -520,6 +528,24 @@ public:
         return -1;
     }
 
+    void undo()
+    {
+        if (!s1.isEmpty())
+        {
+            s2.push(s1.peek());
+            s1.pop();
+        }
+    }
+
+    void redo()
+    {
+        if (!s2.isEmpty())
+        {
+            s1.push(s2.peek());
+            s2.pop();
+        }
+    }
+
     char opreate()
     {
         int zeroIndex = searchZero();
@@ -550,30 +576,36 @@ public:
         //     cin >> input;
         // }
 
+        bool undoOp = false;
+        bool redoOp = false;
+
         if (input == 'u')
         {
-            undo();
             if (!s1.isEmpty())
             {
                 input = s1.peek();
+                undoOp = true;
+                undo();
             }
             else
             {
                 input = '\0';
             }
         }
-        else if (input == 'r')
-        {
-            redo();
-            if (!s2.isEmpty())
-            {
-                input = s2.peek();
-            }
-            else
-            {
-                input = '\0';
-            }
-        }
+
+        // else if (input == 'r')
+        // {
+        //     if (!s2.isEmpty())
+        //     {
+        //         input = s2.peek();
+        //         redo();
+        //         Trace = input;
+        //     }
+        //     else
+        //     {
+        //         input = '\0';
+        //     }
+        // }
 
         if (input == '\033')
         {
@@ -582,130 +614,142 @@ public:
             {
                 input = cin.get();
             }
-
-            // Move up
-            if (input == 'A' || input == 'B' || input == 'C' || input == 'D')
+        }
+        // Move up
+        if (input == 'A' || input == 'B' || input == 'C' || input == 'D')
+        {
+            if (input == 'B') // || input == 's'
             {
-                if (input == 'B') // || input == 's'
+                if (!undoOp)
                 {
                     s1.push('A');
-
-                    if (zeroIndex > 3)
-                    {
-                        swapNode = indexAddress(zeroIndex - 3);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else
-                    {
-                        cout << "Move not allowed." << endl;
-                    }
                 }
-                // Move down
-                else if (input == 'A') // || input == 'w'
+
+                if (zeroIndex > 3)
+                {
+                    swapNode = indexAddress(zeroIndex - 3);
+                    Swap(zeroAddress, swapNode);
+                }
+                else
+                {
+                    cout << "Move not allowed." << endl;
+                }
+            }
+            // Move down
+            else if (input == 'A') // || input == 'w'
+            {
+                if (!undoOp)
                 {
                     s1.push('B');
-
-                    if (zeroIndex <= 6)
-                    {
-                        swapNode = indexAddress(zeroIndex + 3);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else
-                    {
-                        cout << "Move not allowed." << endl;
-                    }
                 }
-                // Move left
-                else if (input == 'C') // || input == 'd'
+
+                if (zeroIndex <= 6)
+                {
+                    swapNode = indexAddress(zeroIndex + 3);
+                    Swap(zeroAddress, swapNode);
+                }
+                else
+                {
+                    cout << "Move not allowed." << endl;
+                }
+            }
+            // Move left
+            else if (input == 'C') // || input == 'd'
+            {
+                if (!undoOp)
                 {
                     s1.push('D');
-
-                    if (zeroIndex == 9)
-                    {
-                        swapNode = indexAddress(zeroIndex - 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 8)
-                    {
-                        swapNode = indexAddress(zeroIndex - 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 6)
-                    {
-                        swapNode = indexAddress(zeroIndex - 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 5)
-                    {
-                        swapNode = indexAddress(zeroIndex - 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 3)
-                    {
-                        swapNode = indexAddress(zeroIndex - 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 2)
-                    {
-                        swapNode = indexAddress(zeroIndex - 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 1 || zeroIndex == 4 || zeroIndex == 7)
-                    {
-                        cout << "Move not allowed." << endl;
-                    }
-                    else
-                    {
-                        cout << "ERROR!.\n";
-                    }
                 }
-                // Move right
-                else if (input == 'D') // || input == 'a'
+
+                if (zeroIndex == 9)
+                {
+                    swapNode = indexAddress(zeroIndex - 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 8)
+                {
+                    swapNode = indexAddress(zeroIndex - 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 6)
+                {
+                    swapNode = indexAddress(zeroIndex - 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 5)
+                {
+                    swapNode = indexAddress(zeroIndex - 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 3)
+                {
+                    swapNode = indexAddress(zeroIndex - 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 2)
+                {
+                    swapNode = indexAddress(zeroIndex - 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 1 || zeroIndex == 4 || zeroIndex == 7)
+                {
+                    cout << "Move not allowed." << endl;
+                }
+                else
+                {
+                    cout << "ERROR!.\n";
+                }
+            }
+            // Move right
+            else if (input == 'D') // || input == 'a'
+            {
+
+                if (!undoOp)
                 {
                     s1.push('C');
-
-                    if (zeroIndex == 1)
-                    {
-                        swapNode = indexAddress(zeroIndex + 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 2)
-                    {
-                        swapNode = indexAddress(zeroIndex + 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 4)
-                    {
-                        swapNode = indexAddress(zeroIndex + 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 5)
-                    {
-                        swapNode = indexAddress(zeroIndex + 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 7)
-                    {
-                        swapNode = indexAddress(zeroIndex + 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 8)
-                    {
-                        swapNode = indexAddress(zeroIndex + 1);
-                        Swap(zeroAddress, swapNode);
-                    }
-                    else if (zeroIndex == 3 || zeroIndex == 6 || zeroIndex == 9)
-                    {
-                        cout << "Move not allowed." << endl;
-                    }
-                    else
-                    {
-                        cout << "ERROR!.\n";
-                    }
                 }
-                // showData();
-                // opreate();
+
+                if (zeroIndex == 1)
+                {
+                    swapNode = indexAddress(zeroIndex + 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 2)
+                {
+                    swapNode = indexAddress(zeroIndex + 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 4)
+                {
+                    swapNode = indexAddress(zeroIndex + 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 5)
+                {
+                    swapNode = indexAddress(zeroIndex + 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 7)
+                {
+                    swapNode = indexAddress(zeroIndex + 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 8)
+                {
+                    swapNode = indexAddress(zeroIndex + 1);
+                    Swap(zeroAddress, swapNode);
+                }
+                else if (zeroIndex == 3 || zeroIndex == 6 || zeroIndex == 9)
+                {
+                    cout << "Move not allowed." << endl;
+                }
+                else
+                {
+                    cout << "ERROR!.\n";
+                }
             }
+            // showData();
+            // opreate();
         }
         else if (input == 'q')
         {
@@ -733,8 +777,6 @@ public:
 class GameLogics : private doublyLinkedList
 {
 private:
-    // Player player;
-
 public:
     void Play()
     {
