@@ -64,21 +64,14 @@ void DeletionOfNodes(int value)
         return;
     }
 
+    Node *parent = nullptr;
     Node *temp = root;
     bool found = false;
-    while (temp)
+
+    while (temp && temp->data != value)
     {
-        if (value == temp->data)
-        {
-            if (!temp->left  && !temp->right )
-            {
-                delete temp;
-                temp = nullptr;
-                return;
-            }
-            
-        }
-        else if (value < temp->data)
+        parent = temp;
+        if (value < temp->data)
         {
             temp = temp->left;
         }
@@ -87,9 +80,77 @@ void DeletionOfNodes(int value)
             temp = temp->right;
         }
     }
-    if (!found)
+    if (!temp)
     {
         cout << "Value is not Found.\n";
+        return;
+    }
+
+    // case 1: Node with no children. leaf node
+    if (!temp->left && !temp->right)
+    {
+        if (!root)
+        {
+            return;
+        }
+        else if (parent->left == temp)
+        {
+            parent->left = nullptr;
+        }
+        else
+        {
+            parent->right = nullptr;
+        }
+        delete temp;
+    }
+    // case 2: Node with one child
+    else if (!temp->left || !temp->right)
+    {
+        Node *child = nullptr;
+        if (!temp->left)
+        {
+            child = temp->left;
+        }
+        else
+        {
+            child = temp->right;
+        }
+
+        if (temp == root)
+        {
+            root = child;
+        }
+        else if (parent->left == temp)
+        {
+            parent->left = child;
+        }
+        else
+        {
+            parent->right = child;
+        }
+        delete temp;
+    }
+    // Case 3: Node with two children
+    else
+    {
+
+        Node *successorParent = temp;
+        Node *successor = temp->right;
+        while (successor->left)
+        {
+            successorParent = successor;
+            successor = successor->left;
+        }
+        temp->data = successor->data;
+        if (successorParent->left = successor)
+        {
+            successorParent->left = successor->right;
+        }
+        else
+        {
+            successorParent->right = successor->right;
+        }
+        delete successor;
     }
 }
 
@@ -116,9 +177,10 @@ int main()
     preshow(root);
     cout << "\n";
 
-
-
     DeletionOfNodes(10);
+    DeletionOfNodes(30);
+    DeletionOfNodes(57);
+    DeletionOfNodes(45);
 
     cout << "List: ";
     preshow(root);
