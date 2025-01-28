@@ -1,17 +1,16 @@
 #include <iostream>
-#include <list>
 #include <vector>
-#include <iterator>
-
+#include <list>
+// #include <iterator>
 using namespace std;
 
-class Edges
+class Edge
 {
 public:
     int destinationId;
     int weight;
-    Edges(int id = 0, int w = 0) : destinationId(id), weight(w) {}
-    void setEdges(int id = 0, int w = 0)
+    Edge(int id = -1, int w = 0) : destinationId(id), weight(w) {}
+    void setEdge(int id, int w)
     {
         destinationId = id;
         weight = w;
@@ -23,17 +22,18 @@ class Vertex
 public:
     int vertexId;
     string vertexName;
-    list<Edges> edgesList;
-    Vertex(int id = 0, string name = "") : vertexId(id), vertexName(name) {}
-    void setVertex(int id = 0, string name = "")
+    list<Edge> edges;
+
+    Vertex(int id = -1, string name = "") : vertexId(id), vertexName(name) {}
+    void setVertex(int id = -1, string name = "")
     {
         vertexId = id;
         vertexName = name;
     }
-    void printEgdesList()
+    void printEdges()
     {
         cout << "[";
-        for (auto it = edgesList.begin(); it != edgesList.end(); it++)
+        for (auto it = edges.begin(); it != edges.end(); it++)
         {
             cout << it->destinationId << "(" << it->weight << ")->";
         }
@@ -43,8 +43,9 @@ public:
 
 class Graph
 {
-private:
-    bool checkVertaxExist(int id)
+public:
+    vector<Vertex> vertices;
+    bool checkVertexExist(int id)
     {
         for (int i = 0; i < vertices.size(); i++)
         {
@@ -56,84 +57,15 @@ private:
         return false;
     }
 
-    Vertex getVertexById(int id)
-    {
-        Vertex temp;
-        for (int i = 0; i < vertices.size(); i++)
-        {
-            temp = vertices.at(i);
-            if (temp.vertexId == id)
-            {
-                return temp;
-            }
-        }
-        return temp;
-    }
-
-    bool checkifEdgeExistById(int id1, int id2)
-    {
-        Vertex vertex = getVertexById(id1);
-        list<Edges> edges;
-        edges = vertex.edgesList;
-        for (auto it = edges.begin(); it != edges.end(); it++)
-        {
-            if (it->destinationId == id2)
-            {
-                return true;
-                break;
-            }
-        }
-        return false;
-    }
-
-public:
-    vector<Vertex> vertices;
-
     void addVertex(Vertex newVertex)
     {
-        if (!checkVertaxExist(newVertex.vertexId))
+        if (!checkVertexExist(newVertex.vertexId))
         {
             vertices.push_back(newVertex);
         }
         else
         {
-            cout << "Vertex is allready Present.\n";
-        }
-    }
-
-    void addEdgesById(int id1, int id2, int w)
-    {
-        bool check1 = checkVertaxExist(id1);
-        bool check2 = checkVertaxExist(id2);
-
-        if (check1 && check2) // if (check1 && check2 == true)
-        {
-            bool check3 = checkifEdgeExistById(id1, id2);
-            if (!check3)
-            {
-                for (int i = 0; i < vertices.size(); i++)
-                {
-                    if (vertices.at(i).vertexId == id1)
-                    {
-                        Edges e(id2, w);
-                        vertices.at(i).edgesList.push_back(e);
-                    }
-                    else if (vertices.at(i).vertexId == id2)
-                    {
-                        Edges e(id1, w);
-                        vertices.at(i).edgesList.push_back(e);
-                    }
-                    cout << "Connection b/w id1 and id2 are successfully add.\n";
-                }
-            }
-            else
-            {
-                cout << "EDGE already Exist.\n";
-            }
-        }
-        else
-        {
-            cout << "Invalid ID Entered!.\n";
+            cout << "Vertex Already Exist.\n";
         }
     }
 
@@ -141,33 +73,119 @@ public:
     {
         for (int i = 0; i < vertices.size(); i++)
         {
-            Vertex temp;
-            temp = vertices.at(i);
+            Vertex temp = vertices.at(i);
             cout << temp.vertexName << "(" << temp.vertexId << ")-->";
-            temp.printEgdesList();
+            temp.printEdges();
             cout << "\n";
         }
         cout << "\n";
     }
 
-    void updateVertex();
-    void deleteVertex();
-    void updateEdges();
-    void deleteEdges();
-    void searchVertx();
-    bool CheckVertxConnections();
+    bool checkEgdesConnectionExist(int id1, int id2)
+    {
+        Vertex v = vertices.at(id1);
+        for (auto it = v.edges.begin(); it != v.edges.end(); it++)
+        {
+            if (it->destinationId == id2)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    void addEdgesById(int id1, int id2, int w)
+    {
+        bool checkVextex1Exist = checkVertexExist(id1);
+        bool checkVextex2Exist = checkVertexExist(id2);
+        if (checkVextex1Exist && checkVextex2Exist)
+        {
+            bool checkEgdesExist = checkEgdesConnectionExist(id1, id2);
+            if (!checkEgdesExist)
+            {
+                bool one = false;
+                bool two = false;
+                for (int i = 0; i < vertices.size(); i++)
+                {
+                    if (vertices.at(i).vertexId == id1)
+                    {
+                        Edge newEdge(id2, w);
+                        vertices.at(i).edges.push_back(newEdge);
+                        one = true;
+                    }
+                    else if (vertices.at(i).vertexId == id2)
+                    {
+                        Edge newEdge(id1, w);
+                        vertices.at(i).edges.push_back(newEdge);
+                        two = true;
+                    }
+                }
+                if (one && two)
+                {
+                    cout << "Both Connected.\n";
+                }
+            }
+            else
+            {
+                cout << "Edges already Exist.\n";
+            }
+        }
+        else
+        {
+            cout << "Invalid id entered.\n";
+        }
+    }
+
+    void UpdateEdge(int id1, int id2, int newWeight)
+    {
+        bool check = checkEgdesConnectionExist(id1, id2);
+
+        if (check)
+        {
+            for (auto i = 0; i < vertices.size(); i++)
+            {
+                if (vertices.at(i).vertexId == id1)
+                {
+                    for (auto it = vertices.at(i).edges.begin(); it != vertices.at(i).edges.end(); it++)
+                    {
+                        if (it->destinationId == id2)
+                        {
+                            it->weight = newWeight;
+                            break;
+                        }
+                    }
+                }
+                else if (vertices.at(i).vertexId == id2)
+                {
+                    for (auto it = vertices.at(i).edges.begin(); it != vertices.at(i).edges.end(); it++)
+                    {
+                        if (it->destinationId == id1)
+                        {
+                            it->weight = newWeight;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            cout << "Edges not exist b/w Vertices.\n";
+        }
+    }
 };
 
 int main()
 {
-    Graph graph;
-    Vertex vertex;
+    Graph g;
+    Vertex v;
     string name;
-    int option, id, id2, w;
-
+    int id1, id2, option, w;
     do
     {
-        cout << "Select Option number. Enter 0 to exit." << endl;
+        cout << "Select Option number. Enter 0 to exit.\n"
+             << endl;
         cout << "1. Add Vertex" << endl;
         cout << "2. Update Vertex" << endl;
         cout << "3. Delete Vertex" << endl;
@@ -190,11 +208,11 @@ int main()
         case 1:
             cout << "Add Vertex Operation" << endl;
             cout << "Enter Vertex ID:";
-            cin >> id;
+            cin >> id1;
             cout << "Enter Vertex Name:";
             cin >> name;
-            vertex.setVertex(id, name);
-            graph.addVertex(vertex);
+            v.setVertex(id1, name);
+            g.addVertex(v);
 
             break;
 
@@ -209,17 +227,25 @@ int main()
         case 4:
             cout << "Add Edge Operation" << endl;
             cout << "Enter ID of Source Vertex: ";
-            cin >> id;
+            cin >> id1;
             cout << "Enter ID of Destination Vertex: ";
             cin >> id2;
             cout << "Enter Weight of the Edge: ";
             cin >> w;
-            graph.addEdgesById(id, id2, w);
+            g.addEdgesById(id1, id2, w);
 
             break;
 
         case 5:
             cout << "Update Edge Operation" << endl;
+            cout << "Enter the Source id1:";
+            cin >> id1;
+            cout << "Enter the Destination id2:";
+            cin >> id2;
+            cout << "Enter New Weight:";
+            int weight;
+            cin >> weight;
+            g.UpdateEdge(id1, id2, weight);
             break;
         case 6:
             cout << "Delete Edge Operation" << endl;
@@ -235,12 +261,13 @@ int main()
 
         case 9:
             cout << "Print Graph Operation" << endl;
-            graph.printGraph();
+            g.printGraph();
             break;
 
         default:
             cout << "Enter valid Operation." << endl;
         }
+
     } while (option != 0);
 
     cout << endl;
