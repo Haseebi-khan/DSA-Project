@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slides Puzzle Game - Official Release</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; }
-        h1, h2 { color: #333; }
-        .code { background-color: #f4f4f4; padding: 10px; border-radius: 5px; font-family: monospace; }
-    </style>
 </head>
 <body>
     <h1>🎉 Slides Puzzle Game - Official Release 🎉</h1>
