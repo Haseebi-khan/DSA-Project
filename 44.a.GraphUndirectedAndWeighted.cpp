@@ -45,11 +45,36 @@ class Graph
 {
 public:
     vector<Vertex> vertices;
+
+    void printGraph()
+    {
+        for (int i = 0; i < vertices.size(); i++)
+        {
+            Vertex temp = vertices.at(i);
+            cout << temp.vertexName << "(" << temp.vertexId << ")-->";
+            temp.printEdges();
+            cout << "\n";
+        }
+        cout << "\n";
+    }
+
     bool checkVertexExist(int id)
     {
         for (int i = 0; i < vertices.size(); i++)
         {
             if (vertices.at(i).vertexId == id)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    bool checkEgdesConnectionExist(int fromVertex, int toVertex)
+    {
+        Vertex v = vertices.at(fromVertex);
+        for (auto it = v.edges.begin(); it != v.edges.end(); it++)
+        {
+            if (it->destinationId == toVertex)
             {
                 return true;
             }
@@ -69,54 +94,28 @@ public:
         }
     }
 
-    void printGraph()
+    void addEdgesById(int fromVertex, int toVertex, int w)
     {
-        for (int i = 0; i < vertices.size(); i++)
-        {
-            Vertex temp = vertices.at(i);
-            cout << temp.vertexName << "(" << temp.vertexId << ")-->";
-            temp.printEdges();
-            cout << "\n";
-        }
-        cout << "\n";
-    }
-
-    bool checkEgdesConnectionExist(int id1, int id2)
-    {
-        Vertex v = vertices.at(id1);
-        for (auto it = v.edges.begin(); it != v.edges.end(); it++)
-        {
-            if (it->destinationId == id2)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    void addEdgesById(int id1, int id2, int w)
-    {
-        bool checkVextex1Exist = checkVertexExist(id1);
-        bool checkVextex2Exist = checkVertexExist(id2);
+        bool checkVextex1Exist = checkVertexExist(fromVertex);
+        bool checkVextex2Exist = checkVertexExist(toVertex);
         if (checkVextex1Exist && checkVextex2Exist)
         {
-            bool checkEgdesExist = checkEgdesConnectionExist(id1, id2);
+            bool checkEgdesExist = checkEgdesConnectionExist(fromVertex, toVertex);
             if (!checkEgdesExist)
             {
                 bool one = false;
                 bool two = false;
                 for (int i = 0; i < vertices.size(); i++)
                 {
-                    if (vertices.at(i).vertexId == id1)
+                    if (vertices.at(i).vertexId == fromVertex)
                     {
-                        Edge newEdge(id2, w);
+                        Edge newEdge(toVertex, w);
                         vertices.at(i).edges.push_back(newEdge);
                         one = true;
                     }
-                    else if (vertices.at(i).vertexId == id2)
+                    else if (vertices.at(i).vertexId == toVertex)
                     {
-                        Edge newEdge(id1, w);
+                        Edge newEdge(fromVertex, w);
                         vertices.at(i).edges.push_back(newEdge);
                         two = true;
                     }
@@ -137,30 +136,30 @@ public:
         }
     }
 
-    void UpdateEdge(int id1, int id2, int newWeight)
+    void UpdateEdge(int fromVertex, int toVertex, int newWeight)
     {
-        bool check = checkEgdesConnectionExist(id1, id2);
+        bool check = checkEgdesConnectionExist(fromVertex, toVertex);
 
         if (check)
         {
             for (auto i = 0; i < vertices.size(); i++)
             {
-                if (vertices.at(i).vertexId == id1)
+                if (vertices.at(i).vertexId == fromVertex)
                 {
                     for (auto it = vertices.at(i).edges.begin(); it != vertices.at(i).edges.end(); it++)
                     {
-                        if (it->destinationId == id2)
+                        if (it->destinationId == toVertex)
                         {
                             it->weight = newWeight;
                             break;
                         }
                     }
                 }
-                else if (vertices.at(i).vertexId == id2)
+                else if (vertices.at(i).vertexId == toVertex)
                 {
                     for (auto it = vertices.at(i).edges.begin(); it != vertices.at(i).edges.end(); it++)
                     {
-                        if (it->destinationId == id1)
+                        if (it->destinationId == fromVertex)
                         {
                             it->weight = newWeight;
                             break;
@@ -172,6 +171,24 @@ public:
         else
         {
             cout << "Edges not exist b/w Vertices.\n";
+        }
+    }
+
+    void deleteEdgesById(int fromVertex, int toVertex)
+    {
+        bool checkEdges = checkEgdesConnectionExist(fromVertex, toVertex);
+
+        if (checkEdges)
+        {
+            for (int i = 0; i < vertices.size(); i++)
+            {
+                /* code */
+            }
+            
+        }
+        else
+        {
+            cout << "Vertices don't have Edges.\n";
         }
     }
 };
