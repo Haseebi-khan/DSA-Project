@@ -22,7 +22,7 @@ class Vertex
 public:
     int vertexId;
     string vertexName;
-    list<Edge> edges;
+    list<Edge> edgesList;
 
     Vertex(int id = -1, string name = "") : vertexId(id), vertexName(name) {}
     void setVertex(int id = -1, string name = "")
@@ -33,7 +33,7 @@ public:
     void printEdges()
     {
         cout << "[";
-        for (auto it = edges.begin(); it != edges.end(); it++)
+        for (auto it = edgesList.begin(); it != edgesList.end(); it++)
         {
             cout << it->destinationId << "(" << it->weight << ")->";
         }
@@ -69,16 +69,32 @@ public:
         }
         return false;
     }
+    
+    // bool checkEgdesConnectionExist(int fromVertex, int toVertex)
+    // {
+    //     Vertex v = vertices.at(fromVertex);
+    //     for (auto it = v.edgesList.begin(); it != v.edgesList.end(); it++)
+    //     {
+    //         if (it->destinationId == toVertex)
+    //         {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
     bool checkEgdesConnectionExist(int fromVertex, int toVertex)
     {
         Vertex v = vertices.at(fromVertex);
-        for (auto it = v.edges.begin(); it != v.edges.end(); it++)
+
+        for (const auto &edge : v.edgesList)
         {
-            if (it->destinationId == toVertex)
+            if (edge.destinationId == toVertex)
             {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -87,6 +103,7 @@ public:
         if (!checkVertexExist(newVertex.vertexId))
         {
             vertices.push_back(newVertex);
+            cout << "Vertex added.\n";
         }
         else
         {
@@ -110,13 +127,13 @@ public:
                     if (vertices.at(i).vertexId == fromVertex)
                     {
                         Edge newEdge(toVertex, w);
-                        vertices.at(i).edges.push_back(newEdge);
+                        vertices.at(i).edgesList.push_back(newEdge);
                         one = true;
                     }
                     else if (vertices.at(i).vertexId == toVertex)
                     {
                         Edge newEdge(fromVertex, w);
-                        vertices.at(i).edges.push_back(newEdge);
+                        vertices.at(i).edgesList.push_back(newEdge);
                         two = true;
                     }
                 }
@@ -146,7 +163,7 @@ public:
             {
                 if (vertices.at(i).vertexId == fromVertex)
                 {
-                    for (auto it = vertices.at(i).edges.begin(); it != vertices.at(i).edges.end(); it++)
+                    for (auto it = vertices.at(i).edgesList.begin(); it != vertices.at(i).edgesList.end(); it++)
                     {
                         if (it->destinationId == toVertex)
                         {
@@ -157,7 +174,7 @@ public:
                 }
                 else if (vertices.at(i).vertexId == toVertex)
                 {
-                    for (auto it = vertices.at(i).edges.begin(); it != vertices.at(i).edges.end(); it++)
+                    for (auto it = vertices.at(i).edgesList.begin(); it != vertices.at(i).edgesList.end(); it++)
                     {
                         if (it->destinationId == fromVertex)
                         {
@@ -167,10 +184,11 @@ public:
                     }
                 }
             }
+            cout << "Edges Connected.\n";
         }
         else
         {
-            cout << "Edges not exist b/w Vertices.\n";
+            cout << "Vertices not exist.\n";
         }
     }
 
@@ -182,9 +200,30 @@ public:
         {
             for (int i = 0; i < vertices.size(); i++)
             {
-                /* code */
+                if (vertices.at(i).vertexId == fromVertex)
+                {
+                    for (auto it = vertices.at(i).edgesList.begin(); it != vertices.at(i).edgesList.end(); it++)
+                    {
+                        if (it->destinationId == toVertex)
+                        {
+                            vertices.at(i).edgesList.erase(it);
+                            break;
+                        }
+                    }
+                }
+                else if (vertices.at(i).vertexId == toVertex)
+                {
+                    for (auto it = vertices.at(i).edgesList.begin(); it != vertices.at(i).edgesList.end(); it++)
+                    {
+                        if (it->destinationId == toVertex)
+                        {
+                            vertices.at(i).edgesList.erase(it);
+                            break;
+                        }
+                    }
+                }
             }
-            
+            cout << "Edges Deleted.\n";
         }
         else
         {
@@ -230,7 +269,6 @@ int main()
             cin >> name;
             v.setVertex(id1, name);
             g.addVertex(v);
-
             break;
 
         case 2:
@@ -250,7 +288,6 @@ int main()
             cout << "Enter Weight of the Edge: ";
             cin >> w;
             g.addEdgesById(id1, id2, w);
-
             break;
 
         case 5:
@@ -264,8 +301,14 @@ int main()
             cin >> weight;
             g.UpdateEdge(id1, id2, weight);
             break;
+
         case 6:
             cout << "Delete Edge Operation" << endl;
+            cout << "Enter the Source id1:";
+            cin >> id1;
+            cout << "Enter the Destination id2:";
+            cin >> id2;
+            g.deleteEdgesById(id1, id2);
             break;
 
         case 7:
