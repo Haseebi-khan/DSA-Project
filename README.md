@@ -1,15 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slides Puzzle Game - Official Release</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        h1, h2 { color: #333; }
+        .code { background-color: #f4f4f4; padding: 10px; border-radius: 5px; font-family: monospace; }
+        .linux-note { color: red; font-weight: bold; }
+    </style>
 </head>
 <body>
     <h1>🎉 Slides Puzzle Game - Official Release 🎉</h1>
     <p>We are excited to announce the official release of <strong>Slides Puzzle Game</strong>! 🚀</p>
     <p>This game is a classic sliding puzzle where players must arrange a <strong>3x3 number grid</strong> into the correct order by moving the tiles strategically. It’s a fun and challenging way to test your problem-solving skills!</p>
-    <h3><strong>Note for Linux Users:</strong></h3>
+    <h3 class="linux-note">Note for Linux Users:</h3>
     <p>This game is designed to run on Linux-based systems. Ensure you have the necessary tools to compile and run the game.</p>
     <h2>🔥 Features</h2>
     <ul>
