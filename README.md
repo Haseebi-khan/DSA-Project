@@ -1,4 +1,5 @@
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +9,8 @@
     <h1>🎉 Slides Puzzle Game - Official Release 🎉</h1>
     <p>We are excited to announce the official release of <strong>Slides Puzzle Game</strong>! 🚀</p>
     <p>This game is a classic sliding puzzle where players must arrange a <strong>3x3 number grid</strong> into the correct order by moving the tiles strategically. It’s a fun and challenging way to test your problem-solving skills!</p>
+    <h3><strong>Note for Linux Users:</strong></h3>
+    <p>This game is designed to run on Linux-based systems. Ensure you have the necessary tools to compile and run the game.</p>
     <h2>🔥 Features</h2>
     <ul>
         <li>✅ Intuitive controls for seamless tile movement</li>
@@ -26,6 +29,10 @@
     <h2>📂 Installation & Setup</h2>
     <h3>Clone the repository:</h3>
     <pre class="code">git clone https://github.com/Haseebi-khan/DSA-Project.git</pre>
+    <h3>Install Dependencies (for Linux Users):</h3>
+    <p>Ensure you have <strong>g++</strong> installed on your system. If not, run:</p>
+    <pre class="code">sudo apt-get update</pre>
+    <pre class="code">sudo apt-get install g++</pre>
     <h3>Compile the source code:</h3>
     <pre class="code">g++ slides_puzzle.cpp -o slides_puzzle</pre>
     <h3>Run the game:</h3>
