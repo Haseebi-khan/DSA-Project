@@ -286,6 +286,26 @@ public:
         vertices.erase(vertices.begin() + Vertexindex);
         cout << "Vertex deleted.\n";
     }
+
+    void UpdateVertex(int VertexId)
+    {
+        string newVertexName;
+        cout << "Enter The vertex New Name: ";
+        cin >> newVertexName;
+        bool check = checkVertexExist(VertexId);
+        if (check)
+        {
+            for (int i = 0; i < vertices.size(); i++)
+            {
+                if (vertices.at(i).vertexId == VertexId)
+                {
+                    vertices.at(i).vertexName = newVertexName;
+                    break;
+                }
+            }
+        }
+    }
+    
 };
 
 int main()
