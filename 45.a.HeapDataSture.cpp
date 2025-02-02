@@ -1,4 +1,6 @@
 #include <iostream>
+#include <math.h>
+#include <limits.h>
 using namespace std;
 
 class MinHeap
@@ -49,6 +51,16 @@ public:
     {
         return harr[(2 * i) + 2];
     }
+    void swap(int &x, int &y)
+    {
+        int temp = x;
+        x = y;
+        y = temp;
+    }
+    int height(int i)
+    {
+        return ceil(log2(heap_size + 1)) - 1;
+    }
 
     void insert(int value)
     {
@@ -62,19 +74,70 @@ public:
         int i = heap_size - 1;
         harr[i] = value;
 
-        // while (i != 0 && harr[parent(i)] > harr[i])
-        // {
-        //     // 
-        // }
-        
+        while (i != 0 && harr[parent(i)] > harr[i])
+        {
+            swap(harr[parent(i)], harr[i]);
+            i = parent(i);
+        }
     }
+    void minHeapify(int i)
+    {
+        int l = left(i), r = right(i), smallest = i;
+        if (i < heap_size && harr[l] < harr[i])
+        {
+            smallest = l;
+        }
+        if (r < heap_size && harr[r] < harr[smallest])
+        {
+            smallest = r;
+        }
+        if (smallest != i)
+        {
+            swap(harr[i], harr[smallest]);
+            minHeapify(smallest);
+        }
+    }
+    int extractMin()
+    {
+        if (heap_size <= 0)
+        {
+            cout << "Heap is Empty.\n";
+            return INT_MAX;
+        }
+        else if (heap_size == 1)
+        {
+            heap_size--;
+            return harr[0];
+        }
 
-    int getMini(int i);
-    int getMax(int i);
-    int extractMin(int i);
-    void deleteKey(int i, int newValue);
-    void minHeapify(int i);
-    int height(int i);
+        int root = harr[0];
+        harr[0] = harr[heap_size - 1];
+        heap_size--;
+        minHeapify(0);
+        return root;
+    }
+    void deleteKey(int i)
+    {
+        decreaseKey(i, INT_MIN);
+        extractMin();
+    }
+    void decreaseKey(int i, int newValue)
+    {
+        harr[i] = newValue;
+        while (i != 0 && harr[parent(i) > harr[i]])
+        {
+            swap(harr[i], harr[parent(i)]);
+            i = parent(i);
+        }
+    }
+    int getMini(int i)
+    {
+        return harr[0];
+    }
+    int getMax(int i)
+    {
+        return harr[heap_size - 1];
+    }
 };
 
 int main()
