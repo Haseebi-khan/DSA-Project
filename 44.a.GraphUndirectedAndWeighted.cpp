@@ -231,20 +231,56 @@ public:
         }
     }
 
+    // void deleteVertexById(int vertexId)
+    // {
+    //     int Vertexindex = 0;
+    //     for (int i = 0; i < vertices.size(); i++)
+    //     {
+    //         if (vertices.at(i).vertexId == vertexId)
+    //         {
+    //             Vertexindex = i;
+    //         }
+    //     }
+
+    //     for (auto it = vertices.at(Vertexindex).edgesList.begin(); it != vertices.at(Vertexindex).edgesList.end(); it++)
+    //     {
+    //         deleteEdgesById(it->destinationId, vertexId);
+    //     }
+
+    //     vertices.erase(vertices.begin() + Vertexindex);
+    //     cout << "Vertex deleted.\n";
+    // }
+
     void deleteVertexById(int vertexId)
     {
-        int Vertexindex = 0;
+        int Vertexindex = -1;
+
         for (int i = 0; i < vertices.size(); i++)
         {
             if (vertices.at(i).vertexId == vertexId)
             {
                 Vertexindex = i;
+                break; // Exit once found
             }
         }
 
-        for (auto it = vertices.at(vertexId).edgesList.begin(); it != vertices.at(vertexId).edgesList.end(); it++)
+        if (Vertexindex == -1)
         {
-            deleteEdgesById(it->destinationId, vertexId);
+            cout << "Vertex not found.\n";
+            return;
+        }
+
+        // Collect all destination IDs to avoid iterator invalidation
+        list<int> destinations;
+        for (const auto &edge : vertices[Vertexindex].edgesList)
+        {
+            destinations.push_back(edge.destinationId);
+        }
+
+        // Delete edges to each destination
+        for (int destId : destinations)
+        {
+            deleteEdgesById(vertexId, destId);
         }
 
         vertices.erase(vertices.begin() + Vertexindex);
