@@ -90,25 +90,25 @@ public:
     }
 };
 
-int main()
-{
-    ArrayBST bst;
+// int main()
+// {
+//     ArrayBST bst;
 
-    bst.insert(50);
-    bst.insert(30);
-    bst.insert(70);
-    bst.insert(20);
-    bst.insert(40);
-    bst.insert(60);
-    bst.insert(80);
+//     bst.insert(50);
+//     bst.insert(30);
+//     bst.insert(70);
+//     bst.insert(20);
+//     bst.insert(40);
+//     bst.insert(60);
+//     bst.insert(80);
 
-    bst.printTree();
+//     bst.printTree();
 
-    cout << "Search 20: " << (bst.search(20) ? "Found" : "Not Found") << endl; // Found
-    cout << "Search 45: " << (bst.search(45) ? "Found" : "Not Found") << endl; // Not Found
-    cout << "INT_MIN: " << INT_MIN<<"\n";
-    return 0;
-}
+//     cout << "Search 20: " << (bst.search(20) ? "Found" : "Not Found") << endl; // Found
+//     cout << "Search 45: " << (bst.search(45) ? "Found" : "Not Found") << endl; // Not Found
+//     cout << "INT_MIN: " << INT_MIN<<"\n";
+//     return 0;
+// }
 
 
 
