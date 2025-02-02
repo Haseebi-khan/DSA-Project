@@ -77,7 +77,7 @@ public:
         int i = heap_size - 1;
         harr[i] = value;
 
-        while (i != 0 && harr[parent(i)] < harr[i]) 
+        while (i != 0 && harr[parent(i)] < harr[i])
         {
             swap(harr[parent(i)], harr[i]);
             i = parent(i);
@@ -87,12 +87,12 @@ public:
     void maxHeapify(int i)
     {
         int l = left(i), r = right(i), largest = i;
-        
-        if (l < heap_size && harr[l] > harr[i]) 
+
+        if (l < heap_size && harr[l] > harr[i])
         {
             largest = l;
         }
-        if (r < heap_size && harr[r] > harr[largest]) 
+        if (r < heap_size && harr[r] > harr[largest])
         {
             largest = r;
         }
@@ -132,7 +132,7 @@ public:
     void increaseKey(int i, int newValue)
     {
         harr[i] = newValue;
-        while (i != 0 && harr[parent(i)] < harr[i]) 
+        while (i != 0 && harr[parent(i)] < harr[i])
         {
             swap(harr[i], harr[parent(i)]);
             i = parent(i);
@@ -148,7 +148,7 @@ public:
 int main()
 {
     MaxHeap heapArray(5);
-    
+
     heapArray.insert(10);
     heapArray.insert(20);
     heapArray.insert(30);
