@@ -305,7 +305,43 @@ public:
             }
         }
     }
-    
+
+    void printAllNeibhorById(int vId)
+    {
+        cout << vertices.at(vId).vertexName << "(" << vertices.at(vId).vertexId << ")-->";
+        for (int i = 0; i < vertices.size(); i++)
+        {
+            if (vertices.at(i).vertexId == vId)
+            {
+                list<Edge> e;
+                cout << "[";
+                e = vertices.at(vId).edgesList;
+                for (auto it = e.begin(); it != e.end(); it++)
+                {
+                    cout << it->destinationId << "(" << it->weight << ")";
+                }
+                cout << "]";
+            }
+        }
+    }
+
+    bool areNeighbors(int vertexId1, int vertexId2)
+    {
+        for (const auto &vertex : vertices)
+        {
+            if (vertex.vertexId == vertexId1)
+            {
+                for (const auto &edge : vertex.edgesList)
+                {
+                    if (edge.destinationId == vertexId2)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 };
 
 int main()
@@ -349,6 +385,9 @@ int main()
 
         case 2:
             cout << "Update Vertex Operation" << endl;
+            cout << "Enter Vertex ID:";
+            cin >> id1;
+            g.UpdateVertex(id1);
             break;
 
         case 3:
@@ -392,15 +431,26 @@ int main()
 
         case 7:
             cout << "Check if 2 Vertices are Neighbors" << endl;
+            cout << "Enter 1st Vertex Id: ";
+            cin >> id1;
+            cout << "Enter 2nd Vertex Id: ";
+            cin >> id2;
+            g.areNeighbors(id1, id2);
             break;
 
         case 8:
             cout << "Print All Neighbors of a Vertex" << endl;
+            cout << "Enter Vertex Id: ";
+            cin >> id1;
+            g.printAllNeibhorById(id1);
             break;
 
         case 9:
             cout << "Print Graph Operation" << endl;
             g.printGraph();
+            break;
+
+        case 0:
             break;
 
         default:
