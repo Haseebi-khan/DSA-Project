@@ -69,7 +69,7 @@ public:
         }
         return false;
     }
-    
+
     // bool checkEgdesConnectionExist(int fromVertex, int toVertex)
     // {
     //     Vertex v = vertices.at(fromVertex);
@@ -230,6 +230,26 @@ public:
             cout << "Vertices don't have Edges.\n";
         }
     }
+
+    void deleteVertexById(int vertexId)
+    {
+        int Vertexindex = 0;
+        for (int i = 0; i < vertices.size(); i++)
+        {
+            if (vertices.at(i).vertexId == vertexId)
+            {
+                Vertexindex = i;
+            }
+        }
+
+        for (auto it = vertices.at(vertexId).edgesList.begin(); it != vertices.at(vertexId).edgesList.end(); it++)
+        {
+            deleteEdgesById(it->destinationId, vertexId);
+        }
+
+        vertices.erase(vertices.begin() + Vertexindex);
+        cout << "Vertex deleted.\n";
+    }
 };
 
 int main()
@@ -277,6 +297,9 @@ int main()
 
         case 3:
             cout << "Delete Vertex Operation" << endl;
+            cout << "Enter Vertex Id: ";
+            cin >> id1;
+            g.deleteVertexById(id1);
             break;
 
         case 4:
