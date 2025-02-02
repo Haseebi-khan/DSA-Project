@@ -77,7 +77,7 @@ public:
         int i = heap_size - 1;
         harr[i] = value;
 
-        while (i != 0 && harr[parent(i)] < harr[i]) // Max Heap condition
+        while (i != 0 && harr[parent(i)] < harr[i]) 
         {
             swap(harr[parent(i)], harr[i]);
             i = parent(i);
@@ -88,11 +88,11 @@ public:
     {
         int l = left(i), r = right(i), largest = i;
         
-        if (l < heap_size && harr[l] > harr[i]) // Change to '>'
+        if (l < heap_size && harr[l] > harr[i]) 
         {
             largest = l;
         }
-        if (r < heap_size && harr[r] > harr[largest]) // Change to '>'
+        if (r < heap_size && harr[r] > harr[largest]) 
         {
             largest = r;
         }
