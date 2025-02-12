@@ -15,52 +15,52 @@ public:
     {
         harr = new int[cap];
     }
+
     void linearSearch(int Value)
     {
-        bool found = false;
         for (int i = 0; i < heap_size; i++)
         {
             if (harr[i] == Value)
             {
-                found = true;
                 cout << "Value Found!\n";
                 return;
             }
         }
-
         cout << "Value Not Found!\n";
     }
+
     void printArry()
     {
         for (int i = 0; i < heap_size; i++)
         {
             cout << harr[i] << " ";
         }
+        cout << endl;
     }
 
     int parent(int i)
     {
-        return harr[(i - 1) / 2];
+        return (i - 1) / 2;
     }
 
     int left(int i)
     {
-        return harr[(2 * i) + 1];
+        return (2 * i) + 1;
     }
+
     int right(int i)
     {
-        return harr[(2 * i) + 2];
+        return (2 * i) + 2;
     }
+
     void swap(int &x, int &y)
     {
         int temp = x;
         x = y;
         y = temp;
     }
-    int height(int i)
-    {
-        return ceil(log2(heap_size + 1)) - 1;
-    }
+
+    int height() { return ceil(log2(heap_size + 1)) - 1; }
 
     void insert(int value)
     {
@@ -80,10 +80,11 @@ public:
             i = parent(i);
         }
     }
+
     void minHeapify(int i)
     {
         int l = left(i), r = right(i), smallest = i;
-        if (i < heap_size && harr[l] < harr[i])
+        if (l < heap_size && harr[l] < harr[i])
         {
             smallest = l;
         }
@@ -97,6 +98,7 @@ public:
             minHeapify(smallest);
         }
     }
+
     int extractMin()
     {
         if (heap_size <= 0)
@@ -116,34 +118,63 @@ public:
         minHeapify(0);
         return root;
     }
-    void deleteKey(int i)
-    {
-        decreaseKey(i, INT_MIN);
-        extractMin();
-    }
+
     void decreaseKey(int i, int newValue)
     {
         harr[i] = newValue;
-        while (i != 0 && harr[parent(i) > harr[i]])
+        while (i != 0 && harr[parent(i)] > harr[i])
         {
             swap(harr[i], harr[parent(i)]);
             i = parent(i);
         }
     }
-    int getMini(int i)
+
+    void deleteKey(int i)
+    {
+        decreaseKey(i, INT_MIN);
+        extractMin();
+    }
+
+    int getMini()
     {
         return harr[0];
     }
-    int getMax(int i)
+
+    int getMax()
     {
-        return harr[heap_size - 1];
+        int maxVal = harr[heap_size / 2];
+        for (int i = (heap_size / 2) + 1; i < heap_size; i++)
+        {
+            if (harr[i] > maxVal)
+            {
+                maxVal = harr[i];
+            }
+        }
+        return maxVal;
+    }
+    // Prints the elements of the heap array in heap order (level order)
+    void printHeapOrder()
+    {
+        cout << "Heap in heap order (linearly): ";
+        for (int i = 0; i < heap_size; i++)
+            cout << harr[i] << " ";
+        cout << endl;
     }
 };
-
 int main()
 {
-    MinHeap heapArray(5);
-
-    cout << endl;
+    MinHeap heap(10);
+    heap.insert(564);
+    heap.insert(2);
+    heap.insert(34);
+    heap.insert(4);
+    heap.insert(6);
+    heap.insert(3);
+    heap.insert(78);
+    heap.insert(98);
+    cout << "Minimum element in the heap: " << heap.getMini() << endl;
+    heap.printArry();
+    cout << "\n";
+    heap.printHeapOrder();
     return 0;
 }
