@@ -1094,6 +1094,7 @@ int main()
     GameLogics Picture_Puzzal;
     Picture_Puzzal.Play();
 
+    showCursor(true);
     cout << endl;
     return 0;
 }
