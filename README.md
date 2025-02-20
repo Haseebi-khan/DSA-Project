@@ -8,8 +8,8 @@
 <body>
     <h1>🎉 Slides Puzzle Game - Official Release 🎉</h1>
     <p>This game is a classic sliding puzzle where players must arrange a <strong>3x3 number grid</strong> into the correct order by moving the tiles strategically. It’s a fun and challenging way to test your problem-solving skills!</p>
-    <h3><strong style="color: red;">Note for Linux Users:</strong></h3>
-    <p>This game is designed to run on Linux-based systems. Ensure you have the necessary tools to compile and run the game.</p>
+    <h2><strong style="color: red;">Note for Windows Users:</strong></h2>
+    <p>This game is designed to run on Linux-based systems. Ensure you have the necessary UI-Library Func to compile on Windows and run the game.</p>
     <h2>🔥 Features</h2>
     <ul>
         <li>✅ Intuitive controls for seamless tile movement</li>
