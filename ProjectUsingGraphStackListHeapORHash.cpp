@@ -211,6 +211,8 @@ void Lose()
         cout << "│";
     }
 
+    
+
     for (int i = 2; i < 30; i++)
     {
         textColor(2);

@@ -359,14 +359,14 @@ protected:
     }
 
 public:
-    // Node *getHead() const
-    // {
-    //     return head;
-    // }
-    // Node *getTail() const
-    // {
-    //     return tail;
-    // }
+    Node *getHead() const
+    {
+        return head;
+    }
+    Node *getTail() const
+    {
+        return tail;
+    }
     void Box()
     {
 
@@ -1097,4 +1097,5 @@ int main()
     showCursor(true);
     cout << endl;
     return 0;
+
 }
