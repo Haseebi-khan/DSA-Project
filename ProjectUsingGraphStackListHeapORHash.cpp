@@ -211,8 +211,6 @@ void Lose()
         cout << "│";
     }
 
-    
-
     for (int i = 2; i < 30; i++)
     {
         textColor(2);
@@ -377,20 +375,14 @@ public:
     }
     void connectAllEdges()
     {
-        // Connect horizontal edges in a 3x3 grid:
-        // For every vertex, if it is not at the right boundary (i.e. i % 3 != 0),
-        // add an edge to the vertex immediately to its right.
         for (int i = 1; i <= 9; ++i)
         {
-            if (i % 3 != 0) // vertices 1,2,4,5,7,8 have a right neighbor
+            if (i % 3 != 0)
             {
                 addEdgesById(i, i + 1);
             }
         }
 
-        // Connect vertical edges:
-        // For vertices 1 through 6, add an edge to the vertex directly below
-        // (i.e. add 3 to the current vertex id).
         for (int i = 1; i <= 6; ++i)
         {
             addEdgesById(i, i + 3);
@@ -541,7 +533,7 @@ public:
         for (int i = 4; i < 16; i++)
         {
             textColor(2);
-             // Set text color to Blue (colorIndex 4)
+            // Set text color to Blue (colorIndex 4)
             gotoXY(i, 2);
 
             if (i == 8)
