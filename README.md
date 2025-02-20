@@ -38,7 +38,6 @@
     <pre class="code">./slides_puzzle</pre>
     <h2>💡 Future Improvements</h2>
     <ul>
-        <li>⏳ Implementing through Graph Data Structure.</li>
         <li>🎯 Enhancing the puzzle with different difficulty levels</li>
     </ul>
     <p>🔗 <strong><a href="https://github.com/Haseebi-khan/DSA-Project/releases" target="_blank">Download the latest release</a></strong></p>
