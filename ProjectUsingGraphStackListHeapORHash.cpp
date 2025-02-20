@@ -446,7 +446,6 @@ public:
 
     void printGraph()
     {
-        // Iterating over const reference so that vertices aren't modified.
         for (const auto &vertex : vertices)
         {
             cout << vertex.vertexName << "(" << vertex.vertexId << ") --> ";
@@ -541,7 +540,8 @@ public:
 
         for (int i = 4; i < 16; i++)
         {
-            textColor(2); // Set text color to Blue (colorIndex 4)
+            textColor(2);
+             // Set text color to Blue (colorIndex 4)
             gotoXY(i, 2);
 
             if (i == 8)
@@ -762,34 +762,24 @@ public:
         return vertices[target.size()].vertexName == ' ';
     }
 
-    // Inside your Graph class
     int searchZeroIndex()
     {
-        // Iterate through the vertices vector.
-        // We'll use a 1-indexed count (iteration) to match your original function.
         for (size_t i = 0; i < vertices.size(); i++)
         {
-            // Check if the vertexName is a space (' ') or you can check using its ASCII value (32)
             if (vertices[i].vertexName == ' ')
-            { // or (vertices[i].vertexName == 32)
-                // Return the 1-indexed position.
+            {
                 return static_cast<int>(i + 1);
             }
         }
-        // If no vertex with a space is found, return -1.
         return -1;
     }
 
-    // Inside your Graph class
     Vertex *indexAddress(int pos)
     {
-        // Check for an invalid position (pos should be between 1 and vertices.size())
         if (pos < 1 || pos > vertices.size())
         {
             return nullptr;
         }
-        // Return a pointer to the Vertex at the (pos - 1) index,
-        // because vector indexing is 0-based.
         return &vertices[pos - 1];
     }
 
@@ -820,12 +810,11 @@ public:
 
         gotoXY(17, 11);
         cout << "Move Input: ";
-        input = getch(); // Wait for user input
+        input = getch();
 
         bool undoOp = false;
-        bool redoOp = false; // (Not used in this snippet)
+        bool redoOp = false;
 
-        // Handle undo operation.
         if (input == 'u')
         {
             if (!s1.isEmpty())
@@ -841,9 +830,8 @@ public:
             }
         }
 
-        // Process escape sequence if present (for arrow keys).
         if (input == '\033')
-        { // ESC character
+        {
             char nextChar = cin.get();
             if (nextChar == '[')
             {
@@ -851,11 +839,10 @@ public:
             }
         }
 
-        // Process move commands (up, down, left, right)
         if (input == upMove || input == downMove || input == leftMove || input == rightMove)
         {
 
-            // Move Down: (shifts the space upward by swapping with the cell 3 positions above)
+            // Move Down
             if (input == downMove)
             {
                 if (!undoOp)
@@ -873,7 +860,7 @@ public:
                     this_thread::sleep_for(chrono::milliseconds(300));
                 }
             }
-            // Move Up: (shifts the space downward by swapping with the cell 3 positions below)
+            // Move Up
             else if (input == upMove)
             {
                 if (!undoOp)
@@ -898,7 +885,6 @@ public:
                 {
                     s1.push(rightMove);
                 }
-                // The following conditions mimic your original checks.
                 if (zeroIndex == 9 || zeroIndex == 8 ||
                     zeroIndex == 6 || zeroIndex == 5 ||
                     zeroIndex == 3 || zeroIndex == 2)
