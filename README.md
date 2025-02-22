@@ -3,29 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Primary Meta Tags -->
-<title>GitHub - Haseebi-khan/DSA-Project</title>
-<meta name="title" content="GitHub - Haseebi-khan/DSA-Project" />
-<meta name="description" content="Contribute to Haseebi-khan/DSA-Project development by creating an account on GitHub." />
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://github.com/Haseebi-khan/DSA-Project" />
-<meta property="og:title" content="GitHub - Haseebi-khan/DSA-Project" />
-<meta property="og:description" content="Contribute to Haseebi-khan/DSA-Project development by creating an account on GitHub." />
-<meta property="og:image" content="https://metatags.io/images/meta-tags.png" />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content="https://github.com/Haseebi-khan/DSA-Project" />
-<meta property="twitter:title" content="GitHub - Haseebi-khan/DSA-Project" />
-<meta property="twitter:description" content="Contribute to Haseebi-khan/DSA-Project development by creating an account on GitHub." />
-<meta property="twitter:image" content="https://metatags.io/images/meta-tags.png" />
-
-<!-- Meta Tags Generated with https://metatags.io -->
 </head>
 <body>
-    <h1>🎉 Slides Puzzle Game - Official Release 🎉</h1>
+    <h1>🎉 NumJig Puzzle Game - Official Release 🎉</h1>
     <p>This game is a classic sliding puzzle where players must arrange a <strong>3x3 number grid</strong> into the correct order by moving the tiles strategically. It’s a fun and challenging way to test your problem-solving skills!</p>
     <h2><strong style="color: red;">Note for Windows Users:</strong></h2>
     <p>This game is designed to run on Linux-based systems. Ensure you have the necessary UI-Library Func to compile on Windows and run the game.</p>
