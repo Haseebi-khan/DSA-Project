@@ -1,9 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Primary Meta Tags -->
+<title>GitHub - Haseebi-khan/DSA-Project</title>
+<meta name="title" content="GitHub - Haseebi-khan/DSA-Project" />
+<meta name="description" content="Contribute to Haseebi-khan/DSA-Project development by creating an account on GitHub." />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://github.com/Haseebi-khan/DSA-Project" />
+<meta property="og:title" content="GitHub - Haseebi-khan/DSA-Project" />
+<meta property="og:description" content="Contribute to Haseebi-khan/DSA-Project development by creating an account on GitHub." />
+<meta property="og:image" content="https://metatags.io/images/meta-tags.png" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="https://github.com/Haseebi-khan/DSA-Project" />
+<meta property="twitter:title" content="GitHub - Haseebi-khan/DSA-Project" />
+<meta property="twitter:description" content="Contribute to Haseebi-khan/DSA-Project development by creating an account on GitHub." />
+<meta property="twitter:image" content="https://metatags.io/images/meta-tags.png" />
+
+<!-- Meta Tags Generated with https://metatags.io -->
 </head>
 <body>
     <h1>🎉 Slides Puzzle Game - Official Release 🎉</h1>
