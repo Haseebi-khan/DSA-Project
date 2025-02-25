@@ -1,5 +1,5 @@
-git config --global user.name "haseeb khan"                          // editor name 
-git config --global user.email "haseebkhanbettani@gmail.com          // linked email
+git config --global user.name "Name"                          // editor name 
+git config --global user.email "@gmail.com          // linked email
 git config --list                                                    // editor credentials
 git clone [LINK]                                                     // cloning the file with github 
 list -a OR Get-ChildItem -Force                                      // discover hidden file and folders
